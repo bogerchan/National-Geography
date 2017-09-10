@@ -17,7 +17,7 @@
 
     <me.boger.geographic.view.SealedTextView
         android:id="@+id/tv_item_select_date"
-        style="@style/AppTheme.SelectDateText"
+        style="@style/AppTheme.SelectPageText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"

@@ -33,7 +33,7 @@ class DetailPageFragment : NGFragment(), IDetailPageUI {
     companion object {
         val TAG = "DetailPageFragment"
 
-        val KEY_FRAGMENT_NGDETAIL_INTERNAL_DATA = "key_fragment_ngdetail_internal_data"
+        val KEY_FRAGMENT_DETAIL_PAGE_INTERNAL_DATA = "key_fragment_detail_page_internal_data"
     }
 
     private val mPresenter: IDetailPagePresenter by lazy { DetailPagePresenterImpl() }
@@ -135,10 +135,10 @@ class DetailPageFragment : NGFragment(), IDetailPageUI {
 
     private fun restoreDataIfNeed(savedInstanceState: Bundle?) {
         if (savedInstanceState == null
-                || !savedInstanceState.containsKey(KEY_FRAGMENT_NGDETAIL_INTERNAL_DATA)) {
+                || !savedInstanceState.containsKey(KEY_FRAGMENT_DETAIL_PAGE_INTERNAL_DATA)) {
             return
         }
-        mInternalData = savedInstanceState.getSerializable(KEY_FRAGMENT_NGDETAIL_INTERNAL_DATA) as InternalData
+        mInternalData = savedInstanceState.getSerializable(KEY_FRAGMENT_DETAIL_PAGE_INTERNAL_DATA) as InternalData
     }
 
     override fun onSaveInstanceState(outState: Bundle?) {
@@ -147,7 +147,7 @@ class DetailPageFragment : NGFragment(), IDetailPageUI {
         if (outState == null) {
             return
         }
-        outState.putSerializable(KEY_FRAGMENT_NGDETAIL_INTERNAL_DATA, mInternalData)
+        outState.putSerializable(KEY_FRAGMENT_DETAIL_PAGE_INTERNAL_DATA, mInternalData)
     }
 
     fun initData(id: String?, offlineData: DetailPageData?) {
@@ -193,15 +193,15 @@ class DetailPageFragment : NGFragment(), IDetailPageUI {
 
         })
         llcMenuShare.setOnClickListener {
-            mPresenter.shareNGDetailImage(
+            mPresenter.shareDetailPageImage(
                     (vpContent.adapter as DetailPageAdapter).data[vpContent.currentItem].url)
         }
         llcMenuSave.setOnClickListener {
-            mPresenter.saveNGDetailImage(
+            mPresenter.saveDetailPageImage(
                     (vpContent.adapter as DetailPageAdapter).data[vpContent.currentItem].url)
         }
         llcMenuFav.setOnClickListener {
-            mPresenter.setNGDetailItemFavoriteState(
+            mPresenter.setDetailPageItemFavoriteState(
                     (vpContent.adapter as DetailPageAdapter).data[vpContent.currentItem])
         }
     }
@@ -384,5 +384,5 @@ class DetailPageFragment : NGFragment(), IDetailPageUI {
 
     override fun getOfflineData(): DetailPageData = mInternalData.offlineData!!
 
-    override fun getNGDetailDataId(): String = mInternalData.id!!
+    override fun getDetailPageDataId(): String = mInternalData.id!!
 }

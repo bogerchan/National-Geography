@@ -7,11 +7,11 @@ import io.reactivex.disposables.Disposable
  * Created by BogerChan on 2017/7/1.
  */
 interface IDetailPageModel {
-    fun requestNGDetailData(id: String,
-                            onStart: () -> Unit,
-                            onError: (Throwable) -> Unit,
-                            onComplete: () -> Unit,
-                            onNext: (DetailPageData) -> Unit): Disposable
+    fun requestDetailPageData(id: String,
+                              onStart: () -> Unit,
+                              onError: (Throwable) -> Unit,
+                              onComplete: () -> Unit,
+                              onNext: (DetailPageData) -> Unit): Disposable
 
     fun cancelPendingCall()
 

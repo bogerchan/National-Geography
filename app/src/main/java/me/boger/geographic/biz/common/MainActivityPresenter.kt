@@ -8,8 +8,8 @@ class MainActivityPresenter {
     private var mView : MainActivity? = null
 
     fun init(act: MainActivity) {
-        act.showSelectDateContent({
-            act.showNGDetailContent(it)
+        act.showSelectPageContent({
+            act.showDetailPageContent(it)
         })
         mView = act
     }

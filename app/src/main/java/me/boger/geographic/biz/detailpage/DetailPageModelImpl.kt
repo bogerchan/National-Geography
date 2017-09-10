@@ -25,11 +25,11 @@ class DetailPageModelImpl : IDetailPageModel {
 
     private var isUseBufferedData = false
 
-    override fun requestNGDetailData(id: String,
-                                     onStart: () -> Unit,
-                                     onError: (Throwable) -> Unit,
-                                     onComplete: () -> Unit,
-                                     onNext: (DetailPageData) -> Unit): Disposable {
+    override fun requestDetailPageData(id: String,
+                                       onStart: () -> Unit,
+                                       onError: (Throwable) -> Unit,
+                                       onComplete: () -> Unit,
+                                       onNext: (DetailPageData) -> Unit): Disposable {
         val buffData = mBufferedData
         if (buffData != null && isUseBufferedData) {
             isUseBufferedData = false
@@ -37,7 +37,7 @@ class DetailPageModelImpl : IDetailPageModel {
                     .doOnSubscribe { onStart() }
                     .subscribeBy(onError, onComplete, onNext)
         }
-        val dis = mService.requestNGDetailData(id)
+        val dis = mService.requestDetailPageData(id)
                 .doOnSubscribe { onStart() }
                 .subscribeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())

@@ -39,7 +39,7 @@ class DetailPagePresenterImpl : IDetailPagePresenter {
             ui.refreshData(ui.getOfflineData().picture)
             ui.contentType = ContentType.CONTENT
         } else {
-            mModel.requestNGDetailData(ui.getNGDetailDataId(),
+            mModel.requestDetailPageData(ui.getDetailPageDataId(),
                     onStart = {
                         ui.contentType = ContentType.LOADING
                     },
@@ -56,7 +56,7 @@ class DetailPagePresenterImpl : IDetailPagePresenter {
         }
     }
 
-    override fun shareNGDetailImage(url: String) {
+    override fun shareDetailPageImage(url: String) {
         mUI?.showTipMessage(R.string.tip_share_img_start)
         fetchImage(
                 url,
@@ -73,7 +73,7 @@ class DetailPagePresenterImpl : IDetailPagePresenter {
                 })
     }
 
-    override fun saveNGDetailImage(url: String) {
+    override fun saveDetailPageImage(url: String) {
         mUI?.showTipMessage(R.string.tip_save_img_start)
         fetchImage(
                 url,
@@ -91,16 +91,16 @@ class DetailPagePresenterImpl : IDetailPagePresenter {
                 })
     }
 
-    override fun setNGDetailItemFavoriteState(data: DetailPagePictureData) {
+    override fun setDetailPageItemFavoriteState(data: DetailPagePictureData) {
         val supplier = NGRumtime.favoriteNGDataSupplier
         if (data.favorite) {
             data.favorite = false
-            if (!supplier.removeNGDetailDataToFavorite(data)) {
+            if (!supplier.removeDetailPageDataToFavorite(data)) {
                 data.favorite = true
             }
         } else {
             data.favorite = true
-            if (!supplier.addNGDetailDataToFavorite(data)) {
+            if (!supplier.addDetailPageDataToFavorite(data)) {
                 data.favorite = false
             }
         }

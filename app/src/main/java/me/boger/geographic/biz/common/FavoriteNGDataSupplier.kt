@@ -23,74 +23,74 @@ class FavoriteNGDataSupplier(ctx: Context) {
         val KEY_FAVORITE_NG_DETAIL_DATA = "fav_ng_detail_data"
     }
 
-    private var mNGDetailData: DetailPageData = DetailPageData("0", ArrayList<DetailPagePictureData>(0))
+    private var mDetailPageData: DetailPageData = DetailPageData("0", ArrayList<DetailPagePictureData>(0))
 
     private var mSP = ctx.getSharedPreferences(ctx.packageName, Context.MODE_PRIVATE)
 
     init {
-        val jsonNGDetailData = mSP.getString(KEY_FAVORITE_NG_DETAIL_DATA, null)
-        if (!TextUtils.isEmpty(jsonNGDetailData)) {
+        val jsonDetailPageData = mSP.getString(KEY_FAVORITE_NG_DETAIL_DATA, null)
+        if (!TextUtils.isEmpty(jsonDetailPageData)) {
             val list = NGRumtime.gson.fromJson<MutableList<DetailPagePictureData>>(
-                    jsonNGDetailData,
+                    jsonDetailPageData,
                     object : TypeToken<MutableList<DetailPagePictureData>>() {}.type)
-            mNGDetailData.counttotal = list.size.toString()
-            mNGDetailData.picture = list
+            mDetailPageData.counttotal = list.size.toString()
+            mDetailPageData.picture = list
         }
     }
 
-    fun addNGDetailDataToFavorite(data: DetailPagePictureData): Boolean {
+    fun addDetailPageDataToFavorite(data: DetailPagePictureData): Boolean {
         try {
-            if (mNGDetailData.picture.contains(data)) {
+            if (mDetailPageData.picture.contains(data)) {
                 return true
             }
-            mNGDetailData.picture.add(data)
+            mDetailPageData.picture.add(data)
             mSP.edit()
-                    .putString(KEY_FAVORITE_NG_DETAIL_DATA, NGRumtime.gson.toJson(mNGDetailData.picture))
+                    .putString(KEY_FAVORITE_NG_DETAIL_DATA, NGRumtime.gson.toJson(mDetailPageData.picture))
                     .apply()
         } catch (e: Exception) {
             Timber.e(e)
-            mNGDetailData.picture.remove(data)
+            mDetailPageData.picture.remove(data)
             return false
         }
         NGBroadcastManager.sendLocalBroadcast(Intent(NGConstants.ACTION_FAVORITE_DATA_CHANGED))
         return true
     }
 
-    fun removeNGDetailDataToFavorite(data: DetailPagePictureData): Boolean {
+    fun removeDetailPageDataToFavorite(data: DetailPagePictureData): Boolean {
         try {
-            if (!mNGDetailData.picture.contains(data)) {
+            if (!mDetailPageData.picture.contains(data)) {
                 return true
             }
-            mNGDetailData.picture.remove(data)
+            mDetailPageData.picture.remove(data)
             mSP.edit()
-                    .putString(KEY_FAVORITE_NG_DETAIL_DATA, NGRumtime.gson.toJson(mNGDetailData.picture))
+                    .putString(KEY_FAVORITE_NG_DETAIL_DATA, NGRumtime.gson.toJson(mDetailPageData.picture))
                     .apply()
         } catch (e: Exception) {
             Timber.e(e)
-            mNGDetailData.picture.add(data)
+            mDetailPageData.picture.add(data)
             return false
         }
         NGBroadcastManager.sendLocalBroadcast(Intent(NGConstants.ACTION_FAVORITE_DATA_CHANGED))
         return true
     }
 
-    fun getNGDetailData(): DetailPageData {
-        mNGDetailData.picture.forEach {
+    fun getDetailPageData(): DetailPageData {
+        mDetailPageData.picture.forEach {
             it.clearLocale()
         }
-        return mNGDetailData.copy(picture = mNGDetailData.picture.toMutableList())
+        return mDetailPageData.copy(picture = mDetailPageData.picture.toMutableList())
     }
 
     private fun getLastCoverUrl(): String {
-        return if (mNGDetailData.picture.size > 0)
-            mNGDetailData.picture.last().url else ""
+        return if (mDetailPageData.picture.size > 0)
+            mDetailPageData.picture.last().url else ""
     }
 
-    private fun getImageCount() = mNGDetailData.picture.size
+    private fun getImageCount() = mDetailPageData.picture.size
 
     fun syncFavoriteState(data: DetailPageData) {
         val favoriteIdSet = mutableSetOf<String>()
-        mNGDetailData.picture.forEach {
+        mDetailPageData.picture.forEach {
             favoriteIdSet.add(it.id)
         }
         data.picture.forEach {

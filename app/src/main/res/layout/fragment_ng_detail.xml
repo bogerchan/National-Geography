@@ -28,13 +28,13 @@
             android:layout_height="wrap_content">
             <me.boger.geographic.view.SealedTextView
                 android:id="@+id/tv_fragment_ng_detail_title"
-                style="@style/AppTheme.NGDetailTextTitle"
+                style="@style/AppTheme.DetailPageTextTitle"
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="wrap_content" />
             <me.boger.geographic.view.SealedTextView
                 android:id="@+id/tv_fragment_ng_detail_page_idx"
-                style="@style/AppTheme.NGDetailTextTitle"
+                style="@style/AppTheme.DetailPageTextTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
         </android.support.v7.widget.LinearLayoutCompat>
@@ -56,7 +56,7 @@
 
             <me.boger.geographic.view.SealedTextView
                 android:id="@+id/tv_fragment_ng_detail_body"
-                style="@style/AppTheme.NGDetailTextBody"
+                style="@style/AppTheme.DetailPageTextBody"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
         </ScrollView>
@@ -83,14 +83,14 @@
 
                 <me.boger.geographic.view.SealedIconFont
                     android:id="@+id/icon_fragment_ng_detail_menu_share"
-                    style="@style/AppTheme.NGDetailMenuIcon"
+                    style="@style/AppTheme.DetailPageMenuIcon"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="&#xe652;" />
 
                 <me.boger.geographic.view.SealedTextView
                     android:id="@+id/tv_fragment_ng_detail_menu_share"
-                    style="@style/AppTheme.NGDetailMenuText"
+                    style="@style/AppTheme.DetailPageMenuText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/text_share" />
@@ -111,14 +111,14 @@
 
                 <me.boger.geographic.view.SealedIconFont
                     android:id="@+id/icon_fragment_ng_detail_menu_save"
-                    style="@style/AppTheme.NGDetailMenuIcon"
+                    style="@style/AppTheme.DetailPageMenuIcon"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="&#xe609;" />
 
                 <me.boger.geographic.view.SealedTextView
                     android:id="@+id/tv_fragment_ng_detail_menu_save"
-                    style="@style/AppTheme.NGDetailMenuText"
+                    style="@style/AppTheme.DetailPageMenuText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/text_save" />
@@ -139,14 +139,14 @@
 
                 <me.boger.geographic.view.SealedIconFont
                     android:id="@+id/icon_fragment_ng_detail_menu_fav"
-                    style="@style/AppTheme.NGDetailMenuIcon"
+                    style="@style/AppTheme.DetailPageMenuIcon"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="&#xe603;" />
 
                 <me.boger.geographic.view.SealedTextView
                     android:id="@+id/tv_fragment_ng_detail_menu_fav"
-                    style="@style/AppTheme.NGDetailMenuText"
+                    style="@style/AppTheme.DetailPageMenuText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/text_fav" />
@@ -167,7 +167,7 @@
     </android.support.v7.widget.LinearLayoutCompat>
     <me.boger.geographic.view.SealedIconFont
         android:id="@+id/icon_fragment_ng_detail_menu"
-        style="@style/AppTheme.NGDetailMenuIcon"
+        style="@style/AppTheme.DetailPageMenuIcon"
         android:layout_width="40dp"
         android:layout_gravity="bottom|right"
         android:gravity="center"

@@ -183,7 +183,7 @@ class SelectPageFragment(
 
     override fun onLocalBroadcastReceive(action: String, data: Bundle?) {
         if (action == NGConstants.ACTION_FAVORITE_DATA_CHANGED) {
-            mPresenter.notifyFavoriteNGDetailDataChanged()
+            mPresenter.notifyFavoriteDetailPageDataChanged()
         }
     }
 }

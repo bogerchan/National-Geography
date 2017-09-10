@@ -30,5 +30,5 @@ interface IDetailPageUI {
 
     fun getOfflineData(): DetailPageData
 
-    fun getNGDetailDataId(): String
+    fun getDetailPageDataId(): String
 }

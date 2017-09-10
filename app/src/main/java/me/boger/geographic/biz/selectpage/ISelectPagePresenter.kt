@@ -8,7 +8,7 @@ import android.os.Bundle
 interface ISelectPagePresenter {
     fun init(ui: ISelectPageUI)
 
-    fun notifyFavoriteNGDetailDataChanged()
+    fun notifyFavoriteDetailPageDataChanged()
 
     fun destroy()
 

@@ -71,15 +71,15 @@ class MainActivity : NGActivity() {
         mPresenter.init(this)
     }
 
-    fun showSelectDateContent(listener: (SelectPageAlbumData) -> Unit) {
+    fun showSelectPageContent(listener: (SelectPageAlbumData) -> Unit) {
         fragmentManager.beginTransaction()
                 .add(R.id.cfl_activity_main_ng_content, SelectPageFragment(listener), SelectPageFragment.TAG)
                 .commit()
     }
 
-    fun showNGDetailContent(data: SelectPageAlbumData) {
+    fun showDetailPageContent(data: SelectPageAlbumData) {
         val offlineData =
-                if (data.id == "unset") NGRumtime.favoriteNGDataSupplier.getNGDetailData() else null
+                if (data.id == "unset") NGRumtime.favoriteNGDataSupplier.getDetailPageData() else null
         if (offlineData != null && offlineData.picture.isEmpty()) {
             Snackbar.make(
                     findViewById(R.id.cfl_activity_main_ng_content_full),

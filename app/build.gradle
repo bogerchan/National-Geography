@@ -20,9 +20,27 @@ android {
             keyAlias getValue('keyAlias')
             keyPassword getValue('keyPassword')
         }
+        beta {
+            storeFile file('../store.jks')
+            storePassword getValue('storePassword')
+            keyAlias getValue('keyAlias')
+            keyPassword getValue('keyPassword')
+        }
     }
     buildTypes {
+        debug {
+            buildConfigField('boolean', 'LOGGABLE', 'true')
+        }
+        beta {
+            buildConfigField('boolean', 'LOGGABLE', 'true')
+            minifyEnabled true
+            shrinkResources true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'),
+                    'proguard-rules.pro', 'proguard-fresco.pro'
+            signingConfig signingConfigs.release
+        }
         release {
+            buildConfigField('boolean', 'LOGGABLE', 'false')
             minifyEnabled true
             shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android.txt'),

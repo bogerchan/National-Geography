@@ -10,5 +10,5 @@ import retrofit2.http.Path
  */
 interface DetailPageNetworkService {
     @GET("jiekou/albums/a{id}.html")
-    fun requestNGDetailData(@Path("id") id: String): Observable<DetailPageData>
+    fun requestDetailPageData(@Path("id") id: String): Observable<DetailPageData>
 }

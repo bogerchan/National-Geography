@@ -8,11 +8,11 @@ import android.os.Bundle
 interface IDetailPagePresenter {
     fun init(ui: IDetailPageUI)
 
-    fun shareNGDetailImage(url: String)
+    fun shareDetailPageImage(url: String)
 
-    fun saveNGDetailImage(url: String)
+    fun saveDetailPageImage(url: String)
 
-    fun setNGDetailItemFavoriteState(data: DetailPagePictureData)
+    fun setDetailPageItemFavoriteState(data: DetailPagePictureData)
 
     fun destroy()
 

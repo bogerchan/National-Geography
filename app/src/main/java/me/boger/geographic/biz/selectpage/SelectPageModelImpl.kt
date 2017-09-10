@@ -14,8 +14,8 @@ import io.reactivex.schedulers.Schedulers
 
 class SelectPageModelImpl : ISelectPageModel {
 
-    private var mSelectDateDataList = arrayListOf<SelectPageData>()
-    private val mSelectDateNetworkService by lazy {
+    private var mSelectPageDataList = arrayListOf<SelectPageData>()
+    private val mSelectPageNetworkService by lazy {
         NGRumtime.retrofit.create(SelectPageNetworkService::class.java)
     }
 
@@ -39,7 +39,7 @@ class SelectPageModelImpl : ISelectPageModel {
             onNext: (SelectPageData) -> Unit
     ): Disposable {
         val pageIdxStr: String = pageIdx.toString()
-        mSelectDateDataList.forEach {
+        mSelectPageDataList.forEach {
             if (it.page == pageIdxStr) {
                 return Observable.just(it)
                         .doOnNext {
@@ -54,9 +54,9 @@ class SelectPageModelImpl : ISelectPageModel {
             }
         }
         var disposable: Disposable? = null
-        disposable = mSelectDateNetworkService.requestNGDateData(pageIdx)
+        disposable = mSelectPageNetworkService.requestNGDateData(pageIdx)
                 .doOnNext {
-                    mSelectDateDataList.add(it)
+                    mSelectPageDataList.add(it)
                     currentPage = it.page.toInt()
                     totalPage = it.pagecount.toInt()
                     if (currentPage == 1) {
@@ -92,14 +92,14 @@ class SelectPageModelImpl : ISelectPageModel {
     }
 
     override fun clearCache() {
-        mSelectDateDataList.clear()
+        mSelectPageDataList.clear()
     }
 
     override fun onSaveInstanceState(outState: Bundle?) {
         if (outState == null) {
             return
         }
-        outState.putSerializable(KEY_MODEL_SELECT_DATE, mSelectDateDataList)
+        outState.putSerializable(KEY_MODEL_SELECT_DATE, mSelectPageDataList)
     }
 
     override fun restoreDataIfNeed(savedInstanceState: Bundle?) {
@@ -107,7 +107,7 @@ class SelectPageModelImpl : ISelectPageModel {
                 || !savedInstanceState.containsKey(KEY_MODEL_SELECT_DATE)) {
             return
         }
-        mSelectDateDataList = savedInstanceState
+        mSelectPageDataList = savedInstanceState
                 .getSerializable(KEY_MODEL_SELECT_DATE) as ArrayList<SelectPageData>
     }
 }

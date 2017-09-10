@@ -89,7 +89,7 @@ class SelectPagePresenterImpl : ISelectPagePresenter {
                 })
     }
 
-    override fun notifyFavoriteNGDetailDataChanged() {
+    override fun notifyFavoriteDetailPageDataChanged() {
         mUI!!.refreshFavoriteData(NGRumtime.favoriteNGDataSupplier.getFavoriteAlbumData())
     }
 

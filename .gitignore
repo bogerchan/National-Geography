@@ -3,7 +3,6 @@
 *.iml
 build/
 local.properties
-app/bugly
 gradle.properties
 store.jks
-*/build/
+.gradletasknamecache

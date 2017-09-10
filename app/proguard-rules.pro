@@ -37,10 +37,10 @@
 # Retain declared checked exceptions for use by a Proxy instance.
 -keepattributes Exceptions
 -keep class sun.misc.Unsafe { *; }
--keep class geographic.boger.me.nationalgeographic.biz.selectdate.SelectDateData { *; }
--keep class geographic.boger.me.nationalgeographic.biz.selectdate.SelectDateAlbumData { *; }
--keep class geographic.boger.me.nationalgeographic.biz.ngdetail.NGDetailData { *; }
--keep class geographic.boger.me.nationalgeographic.biz.ngdetail.NGDetailPictureData { *; }
+-keep class me.boger.geographic.biz.selectpage.SelectPageData { *; }
+-keep class me.boger.geographic.biz.selectpage.SelectPageAlbumData { *; }
+-keep class me.boger.geographic.biz.detailpage.DetailPageData { *; }
+-keep class me.boger.geographic.biz.detailpage.DetailPagePictureData { *; }
 -keep class app.dinus.com.loadingdrawable.** { *; }
 
 -dontwarn com.tencent.bugly.**

@@ -28,16 +28,16 @@ class NGApplication : Application() {
     private fun initBugly() {
         val appKeyBugly = getString(R.string.app_id_bugly)
         if (!TextUtils.isEmpty(appKeyBugly)) {
-            Bugly.init(this, appKeyBugly, BuildConfig.DEBUG)
+            Bugly.init(this, appKeyBugly, BuildConfig.LOGGABLE)
         }
         Beta.canShowUpgradeActs.add(MainActivity::class.java)
         Beta.autoDownloadOnWifi = true
         Beta.autoCheckUpgrade = true
-        CrashReport.setIsDevelopmentDevice(this, BuildConfig.DEBUG)
+        CrashReport.setIsDevelopmentDevice(this, BuildConfig.LOGGABLE)
     }
 
     private fun initLog() {
-        if (BuildConfig.DEBUG) {
+        if (BuildConfig.LOGGABLE) {
             Timber.plant(Timber.DebugTree())
         }
     }
