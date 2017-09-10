@@ -1,14 +1,44 @@
 language: android
+
+notifications:
+  email: false
+
+sudo: false
+
 android:
   components:
-  - build-tools-25.0.0
-  - android-25
-  - extra-google-google_play_services
-  - extra-google-m2repository
-  - extra-android-m2repository
-  - addon-google_apis-google-25
-  - sys-img-armeabi-v7a-android-19
-  - sys-img-x86-android-17
+    - build-tools-25.0.0
+    - android-25
+    - extra-google-google_play_services
+    - extra-google-m2repository
+    - extra-android-m2repository
+    - addon-google_apis-google-25
+    - sys-img-armeabi-v7a-android-19
+    - sys-img-x86-android-17
 before_install:
-- openssl aes-256-cbc -K $encrypted_606d43e01d50_key -iv $encrypted_606d43e01d50_iv
-  -in store.jks.enc -out store.jks -d
+  - openssl aes-256-cbc -K $encrypted_606d43e01d50_key -iv $encrypted_606d43e01d50_iv
+    -in store.jks.enc -out store.jks -d
+  - chmod +x gradlew
+  - gem install fir-cli
+
+script:
+  - ./gradlew assembleRelease
+
+before_deploy:
+  - mv app/build/outputs/apk/app-release.apk app/build/outputs/apk/national-geography-tp.apk
+
+deploy:
+  provider: releases
+  api_key:
+    secure: IRYAIVS1/TajOxTM+ArqpRglpT1Ldxm/1Hbwb1qH8FNEcVBCLlxDFT9cD8a645uA1w7rQicgQ0kIaoFSqWHKeJBOfSQNe1jQXREi7m9Bj84GoQhCFipeaEe0v/smKUsLSb3Ohf+av2GLHNm5fFxVWanBNN5I/bX30rpV9V5VNVoieXRl2S7v2krgzoKU8ckRbl2w6qJX6kRd/AAG5h4iQ1lLlQ4HNS11bkk6+SxjqX0knm/eSWbRtL6khffW/vSfSSlskw752OpEzoJ5T6lMG7F0w/VZhUQoVdLsMgnJ9jRuir2tUwBSLDAi81i7AR2hoi7kr8PkD1+IfKtUnDQKzxwDblsDoIPKJ4rI2wo3WbxJQHqFvkthngz6SeK7ID1ZpJikJvQpt3c/CE4MRN5ufOuEmAm4p8YI3zIcDYFNOxhRIblD1n05Odl5l/ayO7BwNi/GtcWoTK4oJSDCRpBwFooUduoFHHGjVVZqG6xUPNbwF+g3D31M1sRDFPsIuHmW8GUPqf6LIRPyf3iPsMCXSGRHwdykrfp/1O1jTZp7ZduyKwyM1Y1c9EuKNd5PJP/nUMZMaOIM6pWowEx0SHXhqqvo1ps3SKSy2zDkToWHV5PZsS72ExEf0s9PbjSL8LFrQcorMrbaZuLSsNPoape5WMFvWcF6XNc27z9cd7ijdAQ=
+  file: app/build/outputs/apk/national-geography-tp.apk
+  skip_cleanup: true
+  on:
+    tags: true
+    branches:
+      only:
+        - master
+    repo: bogerchan/National-Geography
+
+after_deploy:
+  - fir p app/build/outputs/apk/national-geography-tp.apk -T $FIR_TOKEN -c "`git cat-file tag $TRAVIS_TAG`"

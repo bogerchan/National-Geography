@@ -37,6 +37,9 @@ android {
         }
         resValue 'string', 'app_id_bugly', getValue('appIdBugly')
     }
+    lintOptions {
+        abortOnError false
+    }
 }
 
 def getValue(String key) {

@@ -1,5 +1,5 @@
 ![预览](doc/img/top.jpg)
-# 国家地理每日精选 第三方客户端
+# 国家地理每日精选 第三方客户端 [![Build Status](https://travis-ci.org/bogerchan/National-Geography.svg?branch=master)](https://travis-ci.org/bogerchan/National-Geography)
 ## 开发缘由
 作为一个地理爱好者,感觉每日精选应用是在有点丑= =,于是花了些业余时间开发了这个应用,纯 Kotlin 源码,也是第一个练手的应用项目吧。
 
