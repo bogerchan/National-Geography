@@ -1,0 +1,138 @@
+<resources>
+    <string name="app_name">国家地理聚合</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="text_action_bar">NG聚合阅读</string>
+    <string name="tip_load_error">数据加载失败, 检查网络后再试试~</string>
+    <string name="tip_loading">稍等, 精彩马上呈现~</string>
+    <string name="tip_refresh">网络不给力, 再刷新试试~</string>
+    <string name="text_share">分享</string>
+    <string name="text_save">保存</string>
+    <string name="text_fav">收藏</string>
+    <string name="menu_language_settings">语言设置</string>
+    <string name="tip_unsupport">功能暂未开放, 期待后续版本~</string>
+    <string name="tip_empty_favorite">还没有收藏图片, 先去收藏几张吧~</string>
+    <string name="menu_clean_cache">清理缓存</string>
+    <string name="menu_download_offline">离线下载</string>
+    <string name="tip_share_img_start">打开分享, 请稍后~</string>
+    <string name="tip_share_img_error">无法分享图片, 重试看看吧~</string>
+    <string name="title_share">分享图片到</string>
+    <string name="tip_save_img_start">正在下载原始图片</string>
+    <string name="template_tip_save_img_complete" formatted="false">图片已经保存到 (%s)</string>
+    <string name="template_detail_text_body" formatted="false">%s (摄影: %s)</string>
+    <string name="text_favorite_item_title" formatted="false">进入 我的收藏 (共%s张)</string>
+    <string name="text_language">简体中文(大陆)</string>
+    <string name="text_language_setting">设置显示语言</string>
+    <string name="text_cancel">取消</string>
+    <string name="text_confirm">确认</string>
+    <string name="menu_live_paper">动态壁纸</string>
+    <string name="menu_update_app">检查更新</string>
+    <string name="menu_duty">免责声明</string>
+    <string name="menu_license">开源许可</string>
+    <string name="menu_author">联系作者</string>
+    <string name="text_splash_title_1">国家地理</string>
+    <string name="text_splash_title_2">聚合阅读</string>
+    <string name="text_mail_subject" formatted="false">应用(%s - %s)的问题反馈</string>
+    <string name="text_duty">
+        <![CDATA[
+            <br/>应用中所有图片以及内容均归原作者著作所有, 应用仅供学习交流之用, 严禁商业用途, 本人不付任何责任, 如有任何问题请联系本人沟通。<br/>
+        ]]>
+    </string>
+    <string name="text_license">
+        <![CDATA[
+        <br/><b>Kotlin</b><br/><br/>
+        Copyright 2010-2017 JetBrains s.r.o.<br/><br/>
+        Licensed under the Apache License, Version 2.0 (the "License");
+        you may not use this file except in compliance with the License.
+        You may obtain a copy of the License at<br/><br/>
+        http://www.apache.org/licenses/LICENSE-2.0<br/><br/>
+        Unless required by applicable law or agreed to in writing, software
+        distributed under the License is distributed on an "AS IS" BASIS,
+        WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+        See the License for the specific language governing permissions and
+        limitations under the License.<br/><br/>
+
+        <b>Fresco</b><br/><br/>
+        Copyright 2015-present, Facebook, Inc. All rights reserved.<br/><br/>
+        Redistribution and use in source and binary forms, with or without modification,
+        are permitted provided that the following conditions are met:<br/>
+         * Redistributions of source code must retain the above copyright notice, this
+         list of conditions and the following disclaimer.<br/>
+         * Redistributions in binary form must reproduce the above copyright notice,
+         this list of conditions and the following disclaimer in the documentation
+         and/or other materials provided with the distribution.<br/>
+         * Neither the name Facebook nor the names of its contributors may be used to
+         endorse or promote products derived from this software without specific
+         prior written permission.<br/><br/>
+
+        THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
+        ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+        WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+        DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR
+        ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
+        (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
+        LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
+        ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+        (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+        SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.<br/><br/>
+
+        <b>RxKotlin</b><br/><br/>
+        Copyright 2012 Netflix, Inc.<br/><br/>
+        Licensed under the Apache License, Version 2.0 (the "License");
+           you may not use this file except in compliance with the License.
+           You may obtain a copy of the License at<br/><br/>
+           http://www.apache.org/licenses/LICENSE-2.0<br/><br/>
+           Unless required by applicable law or agreed to in writing, software
+           distributed under the License is distributed on an "AS IS" BASIS,
+           WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+           See the License for the specific language governing permissions and
+           limitations under the License.<br/><br/>
+
+       <b>Retrofit</b><br/><br/>
+        Copyright 2013 Square, Inc.<br/><br/>
+        Licensed under the Apache License, Version 2.0 (the "License");
+        you may not use this file except in compliance with the License.
+        You may obtain a copy of the License at<br/><br/>
+           http://www.apache.org/licenses/LICENSE-2.0<br/><br/>
+           Unless required by applicable law or agreed to in writing, software
+        distributed under the License is distributed on an "AS IS" BASIS,
+        WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+        See the License for the specific language governing permissions and
+        limitations under the License.<br/><br/>
+
+        <b>TwinklingRefreshLayout</b><br/><br/>
+        Copyright 2016 lcodecorex<br/><br/>
+        Licensed under the Apache License, Version 2.0 (the "License");
+        you may not use this file except in compliance with the License.
+        You may obtain a copy of the License at<br/><br/>
+           http://www.apache.org/licenses/LICENSE-2.0<br/><br/>
+           Unless required by applicable law or agreed to in writing, software
+        distributed under the License is distributed on an "AS IS" BASIS,
+        WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+        See the License for the specific language governing permissions and
+        limitations under the License.<br/><br/>
+
+        <b>LoadingDrawable</b><br/><br/>
+        Copyright 2015-2019 dinus<br/><br/>
+        Licensed under the Apache License, Version 2.0 (the "License");
+        you may not use this file except in compliance with the License.
+        You may obtain a copy of the License at<br/><br/>
+           http://www.apache.org/licenses/LICENSE-2.0<br/><br/>
+           Unless required by applicable law or agreed to in writing, software
+        distributed under the License is distributed on an "AS IS" BASIS,
+        WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+        See the License for the specific language governing permissions and
+        limitations under the License.<br/><br/>
+
+        <b>Android OpenCC</b><br/><br/>
+        Licensed under the Apache License, Version 2.0 (the "License");
+        you may not use this file except in compliance with the License.
+        You may obtain a copy of the License at<br/><br/>
+           http://www.apache.org/licenses/LICENSE-2.0<br/><br/>
+           Unless required by applicable law or agreed to in writing, software
+        distributed under the License is distributed on an "AS IS" BASIS,
+        WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+        See the License for the specific language governing permissions and
+        limitations under the License.<br/><br/>
+        ]]>
+    </string>
+</resources>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#292421</color>
+    <color name="colorPrimaryDark">#000000</color>
+    <color name="colorAccent">#000000</color>
+    <color name="splash_gray_start">#d2000000</color>
+    <color name="splash_gray_end">#0c000000</color>
+    <color name="splash_gray_center">#4f000000</color>
+    <color name="ng_yellow">#fdd000</color>
+    <color name="ng_yellow_50">#7ffdd000</color>
+    <color name="pink">#ca5d81</color>
+    <color name="color_gray_50">#7f292421</color>
+    <color name="color_gray_90">#e6292421</color>
+    <color name="color_gray_dark">#7f181513</color>
+    <color name="color_black_70">#b3000000</color>
+
+</resources>

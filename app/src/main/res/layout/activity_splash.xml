@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:mContext="geographic.boger.me.nationalgeographic.biz.splash.SplashActivity">
+
+    <com.facebook.drawee.view.SimpleDraweeView
+        android:id="@+id/sdv_splash"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:placeholderImage="@mipmap/splash"
+        app:placeholderImageScaleType="centerCrop" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/splash_gradient_overlay" />
+
+    <android.support.v7.widget.ContentFrameLayout
+        android:id="@+id/cfl_splash_logo"
+        android:layout_width="120dp"
+        android:layout_height="40dp"
+        android:layout_gravity="center_horizontal|bottom"
+        android:layout_marginBottom="40dp">
+        <com.facebook.drawee.view.SimpleDraweeView
+            android:layout_width="40dp"
+            app:placeholderImageScaleType="centerCrop"
+            app:placeholderImage="@drawable/ng_logo_pure"
+            android:layout_height="40dp" />
+        <me.boger.geographic.view.SealedTextView
+            android:layout_width="wrap_content"
+            android:text="@string/text_splash_title_1"
+            android:textSize="18dp"
+            android:layout_gravity="top|end"
+            style="@style/AppTheme.NGTitle"
+            android:layout_height="wrap_content" />
+        <me.boger.geographic.view.SealedTextView
+            android:layout_width="wrap_content"
+            android:text="@string/text_splash_title_2"
+            android:textSize="14dp"
+            android:layout_gravity="bottom|end"
+            style="@style/AppTheme.NGTitle"
+            android:layout_height="wrap_content" />
+
+    </android.support.v7.widget.ContentFrameLayout>
+</FrameLayout>

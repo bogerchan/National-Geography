@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="200dp">
+
+    <com.facebook.drawee.view.SimpleDraweeView
+        android:id="@+id/sdv_item_select_date"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:placeholderImageScaleType="centerCrop"
+        app:actualImageScaleType="centerCrop"
+        app:placeholderImage="@mipmap/placeholder"
+        app:roundAsCircle="false"
+        app:roundedCornerRadius="5dp" />
+
+    <me.boger.geographic.view.SealedTextView
+        android:id="@+id/tv_item_select_date"
+        style="@style/AppTheme.SelectDateText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        tools:text="2017-06-25 每日精选" />
+</FrameLayout>
