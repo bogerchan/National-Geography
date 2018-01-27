@@ -1,0 +1,8 @@
+def buildPropsFile = project.file("build.properties")
+if (buildPropsFile.exists() && buildPropsFile.isFile()) {
+    def props = new Properties()
+    props.load(buildPropsFile.newInputStream())
+    props.keys().each {
+        project.ext.set(it, props.get(it))
+    }
+}

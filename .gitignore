@@ -3,6 +3,6 @@
 *.iml
 build/
 local.properties
-gradle.properties
 store.jks
 .gradletasknamecache
+build.properties

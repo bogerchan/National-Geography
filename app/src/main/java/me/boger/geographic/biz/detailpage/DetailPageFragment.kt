@@ -6,8 +6,10 @@ import android.animation.ValueAnimator
 import android.content.ContentResolver
 import android.content.Intent
 import android.os.Bundle
+import android.support.design.widget.AppBarLayout
 import android.support.design.widget.Snackbar
 import android.support.v4.view.ViewPager
+import android.support.v7.widget.LinearLayoutCompat
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -39,66 +41,66 @@ class DetailPageFragment : NGFragment(), IDetailPageUI {
     private val mPresenter: IDetailPagePresenter by lazy { DetailPagePresenterImpl() }
 
     private val llcIntroAndMenu by lazy {
-        view!!.findViewById(R.id.llc_fragment_ng_detail_intro_and_menu)
+        view!!.findViewById<LinearLayoutCompat>(R.id.llc_fragment_ng_detail_intro_and_menu)
     }
 
     private val llcMenuShare by lazy {
-        view!!.findViewById(R.id.llc_fragment_ng_detail_menu_share)
+        view!!.findViewById<LinearLayoutCompat>(R.id.llc_fragment_ng_detail_menu_share)
     }
 
     private val llcMenuSave by lazy {
-        view!!.findViewById(R.id.llc_fragment_ng_detail_menu_save)
+        view!!.findViewById<LinearLayoutCompat>(R.id.llc_fragment_ng_detail_menu_save)
     }
 
     private val llcMenuFav by lazy {
-        view!!.findViewById(R.id.llc_fragment_ng_detail_menu_fav)
+        view!!.findViewById<LinearLayoutCompat>(R.id.llc_fragment_ng_detail_menu_fav)
     }
 
     private val llcMenu by lazy {
-        view!!.findViewById(R.id.llc_fragment_ng_detail_menu)
+        view!!.findViewById<LinearLayoutCompat>(R.id.llc_fragment_ng_detail_menu)
     }
 
     private val llcLoading by lazy {
-        view!!.findViewById(R.id.llc_fragment_ng_detail_loading)
+        view!!.findViewById<LinearLayoutCompat>(R.id.llc_fragment_ng_detail_loading)
     }
 
     private val tvTitle by lazy {
-        view!!.findViewById(R.id.tv_fragment_ng_detail_title) as SealedTextView
+        view!!.findViewById<SealedTextView>(R.id.tv_fragment_ng_detail_title)
     }
 
     private val tvPageIdx by lazy {
-        view!!.findViewById(R.id.tv_fragment_ng_detail_page_idx) as SealedTextView
+        view!!.findViewById<SealedTextView>(R.id.tv_fragment_ng_detail_page_idx)
     }
 
     private val tvBody by lazy {
-        view!!.findViewById(R.id.tv_fragment_ng_detail_body) as SealedTextView
+        view!!.findViewById<SealedTextView>(R.id.tv_fragment_ng_detail_body)
     }
 
     private val vpContent by lazy {
-        view!!.findViewById(R.id.vp_fragment_ng_detail) as ViewPager
+        view!!.findViewById<ViewPager>(R.id.vp_fragment_ng_detail)
     }
 
     private val tvMenuButton by lazy {
-        view!!.findViewById(R.id.icon_fragment_ng_detail_menu) as SealedIconFont
+        view!!.findViewById<SealedIconFont>(R.id.icon_fragment_ng_detail_menu)
     }
 
     private val tvMenuFavIcon by lazy {
-        view!!.findViewById(R.id.icon_fragment_ng_detail_menu_fav) as SealedIconFont
+        view!!.findViewById<SealedIconFont>(R.id.icon_fragment_ng_detail_menu_fav)
     }
 
     private val vMenuDivider by lazy {
-        view!!.findViewById(R.id.v_fragment_ng_detail_divider_menu)
+        view!!.findViewById<View>(R.id.v_fragment_ng_detail_divider_menu)
     }
 
     private val ablTitleBar by lazy {
-        activity!!.findViewById(R.id.abl_activity_main_ng_title)
+        activity!!.findViewById<AppBarLayout>(R.id.abl_activity_main_ng_title)
     }
 
     private val mMenuDividerList by lazy {
         arrayOf(
-                view!!.findViewById(R.id.v_fragment_ng_detail_divider_1),
-                view!!.findViewById(R.id.v_fragment_ng_detail_divider_2),
-                view!!.findViewById(R.id.v_fragment_ng_detail_divider_3)
+                view!!.findViewById<View>(R.id.v_fragment_ng_detail_divider_1),
+                view!!.findViewById<View>(R.id.v_fragment_ng_detail_divider_2),
+                view!!.findViewById<View>(R.id.v_fragment_ng_detail_divider_3)
         )
     }
 

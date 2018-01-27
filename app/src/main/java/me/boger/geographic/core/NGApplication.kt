@@ -3,13 +3,11 @@ package me.boger.geographic.core
 import android.app.Application
 import android.text.TextUtils
 import com.facebook.drawee.backends.pipeline.Fresco
-import com.tencent.bugly.Bugly
-import com.tencent.bugly.beta.Beta
-import com.tencent.bugly.crashreport.CrashReport
+import com.flurry.android.FlurryAgent
 import me.boger.geographic.BuildConfig
 import me.boger.geographic.R
-import me.boger.geographic.biz.common.MainActivity
 import me.boger.geographic.util.Timber
+
 
 /**
  * Created by BogerChan on 2017/6/25.
@@ -22,18 +20,16 @@ class NGApplication : Application() {
         AppConfiguration.init(this)
         NGRumtime.init(this)
         LocalizationWorker.prepare(this)
-        initBugly()
+        initFlurry()
     }
 
-    private fun initBugly() {
-        val appKeyBugly = getString(R.string.app_id_bugly)
-        if (!TextUtils.isEmpty(appKeyBugly)) {
-            Bugly.init(this, appKeyBugly, BuildConfig.LOGGABLE)
+    private fun initFlurry() {
+        val apiKeyForFlurry = getString(R.string.api_key_for_flurry)
+        if (!TextUtils.isEmpty(apiKeyForFlurry)) {
+            FlurryAgent.Builder()
+                    .withLogEnabled(true)
+                    .build(this, apiKeyForFlurry)
         }
-        Beta.canShowUpgradeActs.add(MainActivity::class.java)
-        Beta.autoDownloadOnWifi = true
-        Beta.autoCheckUpgrade = true
-        CrashReport.setIsDevelopmentDevice(this, BuildConfig.LOGGABLE)
     }
 
     private fun initLog() {

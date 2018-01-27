@@ -1,14 +1,16 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
-apply plugin: 'bugly'
+
+// Release and Flurry configuration
+apply from: 'release.gradle'
 
 android {
-    compileSdkVersion 25
-    buildToolsVersion "25.0.0"
+    compileSdkVersion 26
+    buildToolsVersion '26.0.2'
     defaultConfig {
         applicationId "me.boger.geographic"
         minSdkVersion 16
-        targetSdkVersion 25
+        targetSdkVersion 26
         versionCode 1
         versionName "1.0.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -53,7 +55,7 @@ android {
             //设置支持的SO库架构
             abiFilters 'armeabi', 'x86', 'armeabi-v7a', 'x86_64', 'arm64-v8a'
         }
-        resValue 'string', 'app_id_bugly', getValue('appIdBugly')
+        resValue 'string', 'api_key_for_flurry', getValue('apiKeyForFlurry')
     }
     lintOptions {
         abortOnError false
@@ -61,38 +63,31 @@ android {
 }
 
 def getValue(String key) {
-    project.hasProperty(key) ? project.getProperty(key) : System.getenv(key)
+    project.hasProperty(key) ? project.getProperty(key) : System.getenv(key) ?: ""
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
-    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    androidTestImplementation('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    compile "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
-    compile 'com.android.support:appcompat-v7:25.3.1'
-    compile 'com.android.support.constraint:constraint-layout:1.0.2'
-    compile 'com.android.support:design:25.3.1'
-    compile 'com.facebook.fresco:fresco:1.3.0'
-    compile 'io.reactivex.rxjava2:rxkotlin:2.1.0'
-    compile 'com.squareup.retrofit2:retrofit:2.3.0'
-    compile 'com.squareup.retrofit2:converter-gson:2.3.0'
-    compile 'io.reactivex.rxjava2:rxandroid:2.0.1'
-    compile 'jp.wasabeef:recyclerview-animators:2.2.6'
-    compile 'com.lcodecorex:tkrefreshlayout:1.0.7'
-    compile 'com.squareup.retrofit2:adapter-rxjava2:2.3.0'
-    compile 'com.github.dinuscxj:LoadingDrawable:db4ceb6b90'
-    compile 'com.zqc.opencc.android.lib:lib-opencc-android:0.8.0@aar'
-    //bugly
-    compile 'com.tencent.bugly:crashreport_upgrade:latest.release'
-    compile 'com.tencent.bugly:nativecrashreport:latest.release'
-    testCompile 'junit:junit:4.12'
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
+    implementation 'com.android.support:appcompat-v7:26.1.0'
+    implementation 'com.android.support.constraint:constraint-layout:1.0.2'
+    implementation 'com.android.support:design:26.1.0'
+    implementation 'com.facebook.fresco:fresco:1.3.0'
+    implementation 'io.reactivex.rxjava2:rxkotlin:2.1.0'
+    implementation 'com.squareup.retrofit2:retrofit:2.3.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.3.0'
+    implementation 'io.reactivex.rxjava2:rxandroid:2.0.1'
+    implementation 'jp.wasabeef:recyclerview-animators:2.2.6'
+    implementation 'com.lcodecorex:tkrefreshlayout:1.0.7'
+    implementation 'com.squareup.retrofit2:adapter-rxjava2:2.3.0'
+    implementation 'com.github.dinuscxj:LoadingDrawable:db4ceb6b90'
+    implementation 'com.zqc.opencc.android.lib:lib-opencc-android:0.8.0@aar'
+    implementation 'com.flurry.android:ads:8.2.0'
+    testImplementation 'junit:junit:4.12'
 }
 repositories {
     mavenCentral()
-}
-
-bugly {
-    appId = getValue('appIdBugly') // 注册时分配的App ID
-    appKey = getValue('appKeyBugly') // 注册时分配的App Key
 }

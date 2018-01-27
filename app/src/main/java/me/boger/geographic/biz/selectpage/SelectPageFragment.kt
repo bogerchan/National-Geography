@@ -2,6 +2,7 @@ package me.boger.geographic.biz.selectpage
 
 import android.os.Bundle
 import android.support.v4.content.res.ResourcesCompat
+import android.support.v7.widget.LinearLayoutCompat
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
@@ -35,37 +36,34 @@ class SelectPageFragment(
     }
 
     private val rvContent: RecyclerView by lazy {
-        view!!.findViewById(R.id.rv_fragment_select_date) as RecyclerView
+        view!!.findViewById<RecyclerView>(R.id.rv_fragment_select_date)
     }
 
     private val trlContent by lazy {
-        view!!.findViewById(R.id.trl_select_date) as TwinklingRefreshLayout
+        view!!.findViewById<TwinklingRefreshLayout>(R.id.trl_select_date)
     }
 
     private val tvLoading by lazy {
-        view!!.findViewById(R.id.tv_fragment_select_date_loading) as SealedTextView
+        view!!.findViewById<SealedTextView>(R.id.tv_fragment_select_date_loading)
     }
 
     private val llLoading by lazy {
-        view!!.findViewById(R.id.ll_fragment_select_date_loading)
+        view!!.findViewById<LinearLayoutCompat>(R.id.ll_fragment_select_date_loading)
     }
 
     private val llError by lazy {
-        view!!.findViewById(R.id.ll_fragment_select_date_error)
+        view!!.findViewById<LinearLayoutCompat>(R.id.ll_fragment_select_date_error)
     }
 
     private val tvError by lazy {
-        view!!.findViewById(R.id.tv_fragment_select_date_error) as SealedTextView
+        view!!.findViewById<SealedTextView>(R.id.tv_fragment_select_date_error)
     }
 
     private val tvErrorIcon by lazy {
-        view!!.findViewById(R.id.icon_fragment_select_date_error_icon) as SealedTextView
+        view!!.findViewById<SealedTextView>(R.id.icon_fragment_select_date_error_icon)
     }
 
     override var contentType = ContentType.UNSET
-        get() {
-            return field
-        }
         set(value) {
             when (value) {
                 ContentType.LOADING -> {

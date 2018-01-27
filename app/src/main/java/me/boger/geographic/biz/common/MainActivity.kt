@@ -18,7 +18,7 @@ import android.view.animation.LinearInterpolator
 import android.view.animation.OvershootInterpolator
 import android.widget.ScrollView
 import android.widget.TextView
-import com.tencent.bugly.beta.Beta
+import android.widget.Toast
 import me.boger.geographic.BuildConfig
 import me.boger.geographic.R
 import me.boger.geographic.biz.detailpage.DetailPageFragment
@@ -306,7 +306,7 @@ class MainActivity : NGActivity() {
 //        intent.data = Uri.parse("market://details?id=geographic.boger.me.nationalgeographic")
 //        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
 //        startActivity(Intent.createChooser(intent, getString(R.string.menu_update_app)))
-        Beta.checkUpgrade()
+        Toast.makeText(this, "Developing...", Toast.LENGTH_SHORT).show()
     }
 
     private fun mailToAuthor() {
