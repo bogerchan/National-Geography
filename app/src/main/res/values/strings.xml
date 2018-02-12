@@ -1,7 +1,7 @@
 <resources>
-    <string name="app_name">国家地理聚合</string>
+    <string name="app_name">NG 地理</string>
     <string name="title_activity_main">MainActivity</string>
-    <string name="text_action_bar">NG聚合阅读</string>
+    <string name="text_action_bar">NG 地理</string>
     <string name="tip_load_error">数据加载失败, 检查网络后再试试~</string>
     <string name="tip_loading">稍等, 精彩马上呈现~</string>
     <string name="tip_refresh">网络不给力, 再刷新试试~</string>
@@ -135,4 +135,28 @@
         limitations under the License.<br/><br/>
         ]]>
     </string>
+    <string name="app_text_font">font/HYRunYuan-35W.ttf</string>
+    <string name="app_icon_font">font/iconfont.ttf</string>
+    <string name="ic_menu">\ue665</string>
+    <string name="ic_cross">\ue736</string>
+    <string name="ic_return">\ue6d8</string>
+    <string name="ic_arrow_right">\ue615</string>
+    <string name="ic_update">\ue60a</string>
+    <string name="ic_info">\ue62a</string>
+    <string name="ic_code">\ue637</string>
+    <string name="ic_robot">\ued05</string>
+    <string name="ic_refresh">\ue605</string>
+    <string name="ic_share">\ue652</string>
+    <string name="ic_save">\ue609</string>
+    <string name="ic_fav">\ue603</string>
+    <string name="ic_fav_solid">\ue677</string>
+    <string name="ic_more">\ue6e5</string>
+    <string name="ic_double_arrow_down">\ue649</string>
+    <string name="tab_national_geography">国家地理</string>
+    <string name="tab_bing_wallpaper">必应每日</string>
+    <string name="tab_favorite_gallery">收藏廊</string>
+    <string name="tip_quit_confirm">再按一次返回键退出</string>
+    <string name="text_page_indicator">%2d/%2d</string>
+    <string name="text_ng_card_show_content" formatted="false">%s (摄影: %s)</string>
+    <string name="text_ng_favorite_set">国家地理收藏夹</string>
 </resources>

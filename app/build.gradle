@@ -1,5 +1,6 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
 
 // Release and Flurry configuration
 apply from: 'release.gradle'
@@ -8,7 +9,7 @@ android {
     compileSdkVersion 26
     buildToolsVersion '26.0.2'
     defaultConfig {
-        applicationId "me.boger.geographic"
+        applicationId "cc.bogerchan.geographic"
         minSdkVersion 16
         targetSdkVersion 26
         versionCode 1
@@ -86,6 +87,9 @@ dependencies {
     implementation 'com.github.dinuscxj:LoadingDrawable:db4ceb6b90'
     implementation 'com.zqc.opencc.android.lib:lib-opencc-android:0.8.0@aar'
     implementation 'com.flurry.android:ads:8.2.0'
+    implementation 'android.arch.lifecycle:extensions:1.1.0'
+    implementation 'com.alexvasilkov:gesture-views:2.4.1'
+    kapt "android.arch.lifecycle:compiler:1.1.0"
     testImplementation 'junit:junit:4.12'
 }
 repositories {

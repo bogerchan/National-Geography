@@ -3,6 +3,8 @@
     <color name="colorPrimary">#292421</color>
     <color name="colorPrimaryDark">#000000</color>
     <color name="colorAccent">#000000</color>
+    <color name="colorAccent70">#b3000000</color>
+    <color name="colorPrimary70">#b3292421</color>
     <color name="splash_gray_start">#d2000000</color>
     <color name="splash_gray_end">#0c000000</color>
     <color name="splash_gray_center">#4f000000</color>

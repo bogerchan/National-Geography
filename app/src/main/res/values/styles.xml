@@ -42,6 +42,19 @@
         <item name="android:gravity">end</item>
     </style>
 
+    <style name="AppTheme.CardFlowItemText">
+        <item name="android:textSize">18dp</item>
+        <item name="android:paddingLeft">10dp</item>
+        <item name="android:paddingRight">10dp</item>
+        <item name="android:paddingTop">5dp</item>
+        <item name="android:paddingBottom">5dp</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:background">@drawable/item_select_date_text_bg</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:ellipsize">end</item>
+        <item name="android:gravity">end</item>
+    </style>
+
     <style name="AppTheme.LoadingText">
         <item name="android:textSize">14dp</item>
         <item name="android:paddingLeft">10dp</item>
@@ -127,6 +140,46 @@
 
     <style name="AppTheme.Divider">
         <item name="android:background">@android:color/white</item>
+    </style>
+
+    <style name="AppTheme.NGCardShowIntroTitle">
+        <item name="android:textSize">16dp</item>
+        <item name="android:paddingLeft">15dp</item>
+        <item name="android:paddingRight">15dp</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:ellipsize">end</item>
+        <item name="android:paddingTop">5dp</item>
+        <item name="android:paddingBottom">5dp</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:gravity">start</item>
+    </style>
+
+    <style name="AppTheme.NGCardShowIntroContent">
+        <item name="android:textSize">14dp</item>
+        <item name="android:paddingLeft">15dp</item>
+        <item name="android:paddingRight">15dp</item>
+        <item name="android:ellipsize">end</item>
+        <item name="android:paddingTop">5dp</item>
+        <item name="android:paddingBottom">5dp</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:gravity">start</item>
+    </style>
+
+    <style name="AppTheme.NGCardShowMenuIcon">
+        <item name="android:textSize">15dp</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:layout_marginRight">10dp</item>
+        <item name="android:ellipsize">end</item>
+        <item name="android:textColor">@drawable/selector_retry_foreground</item>
+        <item name="android:gravity">center</item>
+    </style>
+
+    <style name="AppTheme.NGCardShowMenuText">
+        <item name="android:textSize">15dp</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:ellipsize">end</item>
+        <item name="android:textColor">@drawable/selector_retry_foreground</item>
+        <item name="android:gravity">center</item>
     </style>
 
 </resources>
