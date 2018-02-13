@@ -143,12 +143,12 @@ class NGCardFlowFragment : Fragment() {
             }
         })
         val bezierHeaderView = BezierLayout(activity)
-        bezierHeaderView.setWaveColor(ResourcesCompat.getColor(resources, R.color.color_gray_50, activity.theme))
-        bezierHeaderView.setRippleColor(ResourcesCompat.getColor(resources, R.color.color_gray_dark, activity.theme))
+        bezierHeaderView.setWaveColor(ResourcesCompat.getColor(resources, R.color.colorPrimaryDark20, activity.theme))
+        bezierHeaderView.setRippleColor(ResourcesCompat.getColor(resources, R.color.colorPrimaryDark20, activity.theme))
         trlContent.setHeaderView(bezierHeaderView)
         val ballPulseView = BallPulseView(activity)
-        ballPulseView.setNormalColor(ResourcesCompat.getColor(resources, R.color.ng_yellow_50, activity.theme))
-        ballPulseView.setAnimatingColor(ResourcesCompat.getColor(resources, R.color.ng_yellow_50, activity.theme))
+        ballPulseView.setNormalColor(ResourcesCompat.getColor(resources, R.color.colorAccent20, activity.theme))
+        ballPulseView.setAnimatingColor(ResourcesCompat.getColor(resources, R.color.colorAccent20, activity.theme))
         trlContent.setBottomView(ballPulseView)
         trlContent.setOnRefreshListener(object : RefreshListenerAdapter() {
 

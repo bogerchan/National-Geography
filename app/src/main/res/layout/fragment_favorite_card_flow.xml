@@ -26,7 +26,7 @@
 
         <cc.bogerchan.geographic.view.GeoTextView
             android:id="@+id/gtv_fragment_favorite_card_flow_error"
-            style="@style/AppTheme.LoadingText"
+            style="@style/AppTheme.LoadingErrorText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/tip_refresh"

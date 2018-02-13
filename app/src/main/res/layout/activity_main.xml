@@ -4,7 +4,8 @@
     android:id="@+id/cl_activity_main_content"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorPrimary">
+    android:background="@color/colorPrimary"
+    android:fitsSystemWindows="true">
 
     <LinearLayout
         android:id="@+id/ll_activity_main_content"
@@ -17,11 +18,12 @@
             android:id="@+id/tl_activity_main_tabs"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@color/colorPrimaryDark20"
             app:tabGravity="fill"
-            app:tabIndicatorColor="@color/ng_yellow"
+            app:tabIndicatorColor="@color/colorNGYellow"
             app:tabMode="fixed"
-            app:tabSelectedTextColor="@color/ng_yellow"
-            app:tabTextColor="@drawable/selector_retry_foreground" />
+            app:tabSelectedTextColor="@color/colorNGYellow"
+            app:tabTextColor="@android:color/white" />
 
         <android.support.v4.view.ViewPager
             android:id="@+id/vp_activity_main_content"
@@ -38,17 +40,19 @@
         android:id="@+id/abl_activity_main_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/colorPrimary70"
+        android:background="@color/colorPrimaryDark50"
+        android:fitsSystemWindows="true"
         app:elevation="0dp">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:fitsSystemWindows="true"
             app:layout_scrollFlags="snap">
 
             <cc.bogerchan.geographic.view.GeoTextView
                 android:id="@+id/gtv_activity_main_title"
-                style="@style/AppTheme.NGTitle"
+                style="@style/AppTheme.NGTitleBarText"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -59,10 +63,11 @@
 
             <cc.bogerchan.geographic.view.GeoTextView
                 android:id="@+id/gtv_activity_main_menu"
-                style="@style/AppTheme.NGTitle"
+                style="@style/AppTheme.NGTitleBarIcon"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
+                android:background="@drawable/selector_bg_text"
                 android:padding="12dp"
                 android:text="@string/ic_menu"
                 app:typefaceFromAssets="@string/app_icon_font" />
@@ -75,7 +80,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_gravity="center"
-        android:background="@color/color_black_70"
+        android:background="@color/colorPrimaryDark70"
         android:clickable="true"
         android:focusable="true"
         android:gravity="center"
@@ -102,7 +107,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:alpha="0"
-        android:background="@color/color_gray_90"
+        android:background="@color/colorPrimaryDark90"
         android:visibility="invisible"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 

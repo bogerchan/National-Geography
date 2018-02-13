@@ -1,7 +1,7 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="AppTheme" parent="Theme.Design.Light.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
@@ -22,24 +22,18 @@
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
-    <style name="AppTheme.NGTitle">
+    <style name="AppTheme.NGTitleBarText">
         <item name="android:textSize">20dp</item>
         <item name="android:drawablePadding">10dp</item>
         <item name="android:gravity">center_vertical</item>
-        <item name="android:textColor">@drawable/selector_retry_foreground</item>
+        <item name="android:textColor">@android:color/white</item>
     </style>
 
-    <style name="AppTheme.SelectPageText">
-        <item name="android:textSize">18dp</item>
-        <item name="android:paddingLeft">10dp</item>
-        <item name="android:paddingRight">10dp</item>
-        <item name="android:paddingTop">5dp</item>
-        <item name="android:paddingBottom">5dp</item>
-        <item name="android:textColor">@android:color/white</item>
-        <item name="android:background">@drawable/item_select_date_text_bg</item>
-        <item name="android:maxLines">1</item>
-        <item name="android:ellipsize">end</item>
-        <item name="android:gravity">end</item>
+    <style name="AppTheme.NGTitleBarIcon">
+        <item name="android:textSize">20dp</item>
+        <item name="android:drawablePadding">10dp</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:textColor">@drawable/selector_fg_text</item>
     </style>
 
     <style name="AppTheme.CardFlowItemText">
@@ -49,7 +43,6 @@
         <item name="android:paddingTop">5dp</item>
         <item name="android:paddingBottom">5dp</item>
         <item name="android:textColor">@android:color/white</item>
-        <item name="android:background">@drawable/item_select_date_text_bg</item>
         <item name="android:maxLines">1</item>
         <item name="android:ellipsize">end</item>
         <item name="android:gravity">end</item>
@@ -63,55 +56,27 @@
         <item name="android:ellipsize">end</item>
         <item name="android:paddingTop">5dp</item>
         <item name="android:paddingBottom">5dp</item>
-        <item name="android:textColor">@drawable/selector_retry_foreground</item>
+        <item name="android:textColor">@android:color/white</item>
         <item name="android:gravity">end</item>
     </style>
 
-    <style name="AppTheme.DetailPageTextTitle">
-        <item name="android:textSize">16dp</item>
-        <item name="android:paddingLeft">15dp</item>
-        <item name="android:paddingRight">15dp</item>
+    <style name="AppTheme.LoadingErrorText">
+        <item name="android:textSize">14dp</item>
+        <item name="android:paddingLeft">10dp</item>
+        <item name="android:paddingRight">10dp</item>
         <item name="android:maxLines">1</item>
         <item name="android:ellipsize">end</item>
         <item name="android:paddingTop">5dp</item>
         <item name="android:paddingBottom">5dp</item>
-        <item name="android:textColor">@android:color/white</item>
-        <item name="android:gravity">start</item>
-    </style>
-
-    <style name="AppTheme.DetailPageTextBody">
-        <item name="android:textSize">14dp</item>
-        <item name="android:paddingLeft">15dp</item>
-        <item name="android:paddingRight">15dp</item>
-        <item name="android:ellipsize">end</item>
-        <item name="android:paddingTop">5dp</item>
-        <item name="android:paddingBottom">5dp</item>
-        <item name="android:textColor">@android:color/white</item>
-        <item name="android:gravity">start</item>
+        <item name="android:textColor">@drawable/selector_fg_text</item>
+        <item name="android:gravity">end</item>
     </style>
 
     <style name="AppTheme.IconText">
         <item name="android:textSize">40dp</item>
         <item name="android:maxLines">1</item>
         <item name="android:ellipsize">end</item>
-        <item name="android:textColor">@drawable/selector_retry_foreground</item>
-        <item name="android:gravity">center</item>
-    </style>
-
-    <style name="AppTheme.DetailPageMenuText">
-        <item name="android:textSize">15dp</item>
-        <item name="android:maxLines">1</item>
-        <item name="android:ellipsize">end</item>
-        <item name="android:textColor">@drawable/selector_retry_foreground</item>
-        <item name="android:gravity">center</item>
-    </style>
-
-    <style name="AppTheme.DetailPageMenuIcon">
-        <item name="android:textSize">15dp</item>
-        <item name="android:maxLines">1</item>
-        <item name="android:layout_marginRight">10dp</item>
-        <item name="android:ellipsize">end</item>
-        <item name="android:textColor">@drawable/selector_retry_foreground</item>
+        <item name="android:textColor">@drawable/selector_fg_text</item>
         <item name="android:gravity">center</item>
     </style>
 
@@ -123,7 +88,7 @@
         <item name="android:paddingRight">10dp</item>
         <item name="android:paddingTop">15dp</item>
         <item name="android:paddingBottom">15dp</item>
-        <item name="android:textColor">@drawable/selector_retry_foreground</item>
+        <item name="android:textColor">@drawable/selector_fg_text</item>
         <item name="android:gravity">center</item>
     </style>
 
@@ -133,7 +98,7 @@
         <item name="android:paddingTop">5dp</item>
         <item name="android:paddingBottom">5dp</item>
         <item name="android:textColor">@android:color/white</item>
-        <item name="android:background">@drawable/item_select_date_text_bg</item>
+        <item name="android:background">@drawable/bg_item_ng_card_text</item>
         <item name="android:maxLines">1</item>
         <item name="android:ellipsize">end</item>
     </style>
@@ -142,7 +107,7 @@
         <item name="android:background">@android:color/white</item>
     </style>
 
-    <style name="AppTheme.NGCardShowIntroTitle">
+    <style name="AppTheme.NGCardShowIntroTitleText">
         <item name="android:textSize">16dp</item>
         <item name="android:paddingLeft">15dp</item>
         <item name="android:paddingRight">15dp</item>
@@ -154,7 +119,7 @@
         <item name="android:gravity">start</item>
     </style>
 
-    <style name="AppTheme.NGCardShowIntroContent">
+    <style name="AppTheme.NGCardShowIntroContentText">
         <item name="android:textSize">14dp</item>
         <item name="android:paddingLeft">15dp</item>
         <item name="android:paddingRight">15dp</item>
@@ -170,7 +135,7 @@
         <item name="android:maxLines">1</item>
         <item name="android:layout_marginRight">10dp</item>
         <item name="android:ellipsize">end</item>
-        <item name="android:textColor">@drawable/selector_retry_foreground</item>
+        <item name="android:textColor">@drawable/selector_fg_text</item>
         <item name="android:gravity">center</item>
     </style>
 
@@ -178,7 +143,7 @@
         <item name="android:textSize">15dp</item>
         <item name="android:maxLines">1</item>
         <item name="android:ellipsize">end</item>
-        <item name="android:textColor">@drawable/selector_retry_foreground</item>
+        <item name="android:textColor">@drawable/selector_fg_text</item>
         <item name="android:gravity">center</item>
     </style>
 

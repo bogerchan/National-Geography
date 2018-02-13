@@ -9,6 +9,7 @@ import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import android.net.Uri
 import android.os.Bundle
+import android.support.design.widget.Snackbar
 import android.support.v4.app.Fragment
 import android.support.v4.util.ArraySet
 import android.support.v4.view.PagerAdapter
@@ -219,7 +220,9 @@ class NGCardShowFragment : Fragment() {
 
     private fun bindViewModels() {
         mNGCardShowViewModel.cardData.observe(this, Observer { data ->
-            if (data?.cardElements == null) {
+            if (data?.cardElements == null || data.cardElements!!.isEmpty()) {
+                Snackbar.make(llBottom, R.string.tip_empty_data, Snackbar.LENGTH_SHORT).show()
+                mMainUIViewModel.menuState.value = MainUIViewModel.MenuState.BACK_FROM_RETURN
                 return@Observer
             }
             vpContent.adapter = NGCardShowPagerAdapter(vpContent, data, {
@@ -288,12 +291,17 @@ class NGCardShowFragment : Fragment() {
             when (it.first) {
                 FetchStatus.SUCCESS -> {
                     mFavoriteItems.clear()
-                    if (it.second.isEmpty()) {
-                        return@Observer
+                    if (it.second.isNotEmpty()) {
+                        it.second[0].cardElements?.mapTo(mFavoriteItems, { it.id })
                     }
-                    it.second[0].cardElements?.mapTo(mFavoriteItems, { it.id })
-                    mNGCardShowViewModel.cardData.value?.cardElements?.get(vpContent.currentItem)?.apply {
-                        tvFavIcon.text = if (mFavoriteItems.contains(id)) getString(R.string.ic_fav_solid) else getString(R.string.ic_fav)
+                    val cardElements = mNGCardShowViewModel.cardData.value?.cardElements;
+                    if (cardElements == null || cardElements.isEmpty()) {
+                        Snackbar.make(llBottom, R.string.tip_empty_data, Snackbar.LENGTH_SHORT).show()
+                        mMainUIViewModel.menuState.value = MainUIViewModel.MenuState.BACK_FROM_RETURN
+                    } else {
+                        cardElements.get(vpContent.currentItem).apply {
+                            tvFavIcon.text = if (mFavoriteItems.contains(id)) getString(R.string.ic_fav_solid) else getString(R.string.ic_fav)
+                        }
                     }
                 }
                 else -> {

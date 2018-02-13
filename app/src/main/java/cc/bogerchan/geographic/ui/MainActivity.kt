@@ -4,6 +4,8 @@ import android.animation.*
 import android.annotation.SuppressLint
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
+import android.graphics.Color
+import android.os.Build
 import android.os.Bundle
 import android.os.SystemClock
 import android.support.design.widget.AppBarLayout
@@ -16,6 +18,7 @@ import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
 import android.text.TextUtils
 import android.view.View
+import android.view.WindowManager
 import android.view.animation.LinearInterpolator
 import android.view.animation.OvershootInterpolator
 import android.widget.LinearLayout
@@ -69,6 +72,10 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            window.addFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS)
+            window.statusBarColor = Color.TRANSPARENT
+        }
         setContentView(R.layout.activity_main)
         initViews()
         bindViewModels()

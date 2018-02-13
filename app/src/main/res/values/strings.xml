@@ -159,4 +159,5 @@
     <string name="text_page_indicator">%2d/%2d</string>
     <string name="text_ng_card_show_content" formatted="false">%s (摄影: %s)</string>
     <string name="text_ng_favorite_set">国家地理收藏夹</string>
+    <string name="tip_empty_data">没有数据了</string>
 </resources>

@@ -34,14 +34,14 @@
             android:text="@string/text_splash_title_1"
             android:textSize="18dp"
             android:layout_gravity="top|end"
-            style="@style/AppTheme.NGTitle"
+            style="@style/AppTheme.NGTitleBarText"
             android:layout_height="wrap_content" />
         <me.boger.geographic.view.SealedTextView
             android:layout_width="wrap_content"
             android:text="@string/text_splash_title_2"
             android:textSize="14dp"
             android:layout_gravity="bottom|end"
-            style="@style/AppTheme.NGTitle"
+            style="@style/AppTheme.NGTitleBarText"
             android:layout_height="wrap_content" />
 
     </android.support.v7.widget.ContentFrameLayout>

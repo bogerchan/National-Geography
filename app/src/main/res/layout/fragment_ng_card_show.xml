@@ -25,7 +25,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
-        android:background="@color/color_black_70"
+        android:background="@color/colorPrimaryDark50"
         android:orientation="vertical"
         android:paddingBottom="5dp"
         android:paddingTop="5dp"
@@ -37,7 +37,7 @@
 
             <cc.bogerchan.geographic.view.GeoTextView
                 android:id="@+id/gtv_fragment_ng_card_show_intro_title"
-                style="@style/AppTheme.NGCardShowIntroTitle"
+                style="@style/AppTheme.NGCardShowIntroTitleText"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -45,7 +45,7 @@
 
             <cc.bogerchan.geographic.view.GeoTextView
                 android:id="@+id/tv_fragment_ng_card_show_intro_page"
-                style="@style/AppTheme.NGCardShowIntroTitle"
+                style="@style/AppTheme.NGCardShowIntroTitleText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:typefaceFromAssets="@string/app_text_font" />
@@ -68,7 +68,7 @@
 
             <cc.bogerchan.geographic.view.GeoTextView
                 android:id="@+id/tv_fragment_ng_card_show_intro_content"
-                style="@style/AppTheme.NGCardShowIntroContent"
+                style="@style/AppTheme.NGCardShowIntroContentText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:typefaceFromAssets="@string/app_text_font" />

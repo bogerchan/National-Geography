@@ -5,8 +5,8 @@
         android:angle="90"
         android:centerX="0.5"
         android:centerY="0.2"
-        android:endColor="@color/splash_gray_end"
-        android:centerColor="@color/splash_gray_center"
-        android:startColor="@color/splash_gray_start"
+        android:endColor="@color/splashGrayEnd"
+        android:centerColor="@color/splashGrayCenter"
+        android:startColor="@color/splashGrayStart"
         android:type="linear" />
 </shape>
