@@ -18,7 +18,6 @@ import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
 import android.text.TextUtils
 import android.view.View
-import android.view.WindowManager
 import android.view.animation.LinearInterpolator
 import android.view.animation.OvershootInterpolator
 import android.widget.LinearLayout
@@ -38,7 +37,7 @@ import java.util.*
  */
 class MainActivity : AppCompatActivity() {
 
-    private class DoubleTapDetector() {
+    private class DoubleTapDetector {
 
         private var mLastRecord: Long = 0L
 
@@ -69,14 +68,16 @@ class MainActivity : AppCompatActivity() {
     private val mIconCross by lazy { getString(R.string.ic_cross) }
     private val mIconReturn by lazy { getString(R.string.ic_return) }
     private val mQuitDoubleTapDetector by lazy { DoubleTapDetector() }
+    private var mPendingLoadingAnimator: Animator? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            window.addFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS)
+            window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LAYOUT_STABLE or
+                    View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
             window.statusBarColor = Color.TRANSPARENT
         }
-        setContentView(R.layout.activity_main)
         initViews()
         bindViewModels()
         mFavoriteCardFlowViewModel.fetchCardDataList()
@@ -110,7 +111,6 @@ class MainActivity : AppCompatActivity() {
                 mIconReturn -> mMainUIViewModel.menuState.value = MainUIViewModel.MenuState.BACK_FROM_RETURN
             }
         }
-
     }
 
     private fun bindViewModels() {
@@ -125,10 +125,28 @@ class MainActivity : AppCompatActivity() {
         mMainUIViewModel.uiAction.observe(this, Observer { state ->
             when (state) {
                 MainUIViewModel.UIAction.LOADING -> {
-                    llLoading.visibility = View.VISIBLE
+                    mPendingLoadingAnimator?.cancel()
+                    mPendingLoadingAnimator = ObjectAnimator.ofFloat(llLoading, "alpha", llLoading.alpha, 1f).apply {
+                        duration = 200
+                        addListener(object : AnimatorListenerAdapter() {
+                            override fun onAnimationStart(animation: Animator?) {
+                                llLoading.visibility = View.VISIBLE
+                            }
+                        })
+                        start()
+                    }
                 }
                 MainUIViewModel.UIAction.FINISH_LOADING -> {
-                    llLoading.visibility = View.INVISIBLE
+                    mPendingLoadingAnimator?.cancel()
+                    mPendingLoadingAnimator = ObjectAnimator.ofFloat(llLoading, "alpha", llLoading.alpha, 0f).apply {
+                        duration = 200
+                        addListener(object : AnimatorListenerAdapter() {
+                            override fun onAnimationEnd(animation: Animator?) {
+                                llLoading.visibility = View.INVISIBLE
+                            }
+                        })
+                        start()
+                    }
                 }
                 MainUIViewModel.UIAction.GO_TO_NG_SHOW_PAGE -> {
                     supportFragmentManager.beginTransaction()
@@ -281,6 +299,7 @@ class MainActivity : AppCompatActivity() {
 
                 override fun onAnimationEnd(animation: Animator?) {
                     svMenu.visibility = View.INVISIBLE
+                    llContent.visibility = View.INVISIBLE
                     mPendingMenuAnimator = null
                 }
             })
@@ -298,6 +317,8 @@ class MainActivity : AppCompatActivity() {
                     }
 
                 })
+            }).with(ObjectAnimator.ofFloat(llContent, "alpha", llContent.alpha, 0F).apply {
+                interpolator = LinearInterpolator()
             }).with(ObjectAnimator.ofFloat(svMenu, "alpha", svMenu.alpha, 0F).apply {
                 interpolator = LinearInterpolator()
             }).with(ObjectAnimator.ofFloat(svMenu, "rotationX", svMenu.rotationX, 10F).apply {
@@ -314,6 +335,7 @@ class MainActivity : AppCompatActivity() {
             addListener(object : AnimatorListenerAdapter() {
                 override fun onAnimationStart(animation: Animator?) {
                     mPendingMenuAnimator = animation
+                    llContent.visibility = View.VISIBLE
                 }
 
                 override fun onAnimationEnd(animation: Animator?) {
@@ -335,6 +357,8 @@ class MainActivity : AppCompatActivity() {
                     }
 
                 })
+            }).with(ObjectAnimator.ofFloat(llContent, "alpha", llContent.alpha, 1F).apply {
+                interpolator = LinearInterpolator()
             }).with(ObjectAnimator.ofFloat(svMenu, "alpha", svMenu.alpha, 0F).apply {
                 interpolator = LinearInterpolator()
             }).with(ObjectAnimator.ofFloat(svMenu, "rotationX", svMenu.rotationX, 10F).apply {

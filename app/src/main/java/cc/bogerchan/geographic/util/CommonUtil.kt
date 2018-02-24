@@ -4,7 +4,6 @@ import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Build
-import android.support.v4.app.Fragment
 import android.text.Html
 import android.util.TypedValue
 import android.view.View
@@ -60,10 +59,10 @@ object CommonUtil {
             .baseUrl(baseUrl)
             .addConverterFactory(GsonConverterFactory.create(gson))
             .build()
+}
 
-    fun Fragment.dp2px(dp: Int): Float {
-        return TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp.toFloat(), context.applicationContext.resources.displayMetrics)
-    }
+fun Context.dp2px(dp: Int): Float {
+    return TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp.toFloat(), applicationContext.resources.displayMetrics)
 }
 
 fun <E> MutableList<E>.removeIfCompat(filter: (e: E) -> Boolean): Boolean {

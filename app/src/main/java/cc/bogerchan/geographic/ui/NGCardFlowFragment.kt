@@ -18,8 +18,8 @@ import android.view.animation.OvershootInterpolator
 import android.widget.LinearLayout
 import cc.bogerchan.geographic.R
 import cc.bogerchan.geographic.adapter.NGCardFlowAdapter
-import cc.bogerchan.geographic.util.CommonUtil.dp2px
 import cc.bogerchan.geographic.util.FetchStatus
+import cc.bogerchan.geographic.util.dp2px
 import cc.bogerchan.geographic.viewmodel.MainUIViewModel
 import cc.bogerchan.geographic.viewmodel.NGCardFlowViewModel
 import cc.bogerchan.geographic.viewmodel.NGCardShowViewModel
@@ -106,7 +106,7 @@ class NGCardFlowFragment : Fragment() {
         rvContent.addItemDecoration(object : RecyclerView.ItemDecoration() {
             override fun getItemOffsets(outRect: Rect?, view: View?, parent: RecyclerView?, state: RecyclerView.State?) {
                 super.getItemOffsets(outRect, view, parent, state)
-                val dp5 = dp2px(5).toInt()
+                val dp5 = context.dp2px(5).toInt()
                 outRect?.top = dp5 * 3
                 outRect?.bottom = dp5 * 3
                 outRect?.left = dp5 * 3

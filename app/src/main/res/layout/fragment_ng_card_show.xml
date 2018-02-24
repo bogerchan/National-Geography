@@ -75,7 +75,7 @@
         </ScrollView>
 
         <View
-            android:id="@+id/v_fragment_ng_card_show_menu_divider"
+            android:id="@+id/v_fragment_ng_card_show_menu_divider_top"
             style="@style/AppTheme.Divider"
             android:layout_width="match_parent"
             android:layout_height="1px"
@@ -91,6 +91,7 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="2"
+                android:background="@drawable/selector_bg_text"
                 android:gravity="center">
 
                 <cc.bogerchan.geographic.view.GeoTextView
@@ -118,6 +119,7 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="2"
+                android:background="@drawable/selector_bg_text"
                 android:gravity="center">
 
                 <cc.bogerchan.geographic.view.GeoTextView
@@ -145,6 +147,7 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="2"
+                android:background="@drawable/selector_bg_text"
                 android:gravity="center">
 
                 <cc.bogerchan.geographic.view.GeoTextView
@@ -183,6 +186,7 @@
         android:layout_height="40dp"
         android:layout_gravity="bottom|right"
         android:layout_margin="5dp"
+        android:background="@drawable/selector_bg_text"
         android:gravity="center"
         android:text="@string/ic_more"
         android:visibility="visible"

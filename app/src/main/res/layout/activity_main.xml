@@ -4,32 +4,7 @@
     android:id="@+id/cl_activity_main_content"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorPrimary"
-    android:fitsSystemWindows="true">
-
-    <LinearLayout
-        android:id="@+id/ll_activity_main_content"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior">
-
-        <android.support.design.widget.TabLayout
-            android:id="@+id/tl_activity_main_tabs"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/colorPrimaryDark20"
-            app:tabGravity="fill"
-            app:tabIndicatorColor="@color/colorNGYellow"
-            app:tabMode="fixed"
-            app:tabSelectedTextColor="@color/colorNGYellow"
-            app:tabTextColor="@android:color/white" />
-
-        <android.support.v4.view.ViewPager
-            android:id="@+id/vp_activity_main_content"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-    </LinearLayout>
+    android:background="@color/colorPrimary">
 
     <FrameLayout
         android:id="@+id/fl_activity_main_full_content"
@@ -72,8 +47,31 @@
                 android:text="@string/ic_menu"
                 app:typefaceFromAssets="@string/app_icon_font" />
         </LinearLayout>
-
     </android.support.design.widget.AppBarLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_activity_main_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <android.support.design.widget.TabLayout
+            android:id="@+id/tl_activity_main_tabs"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimaryDark20"
+            app:tabGravity="fill"
+            app:tabIndicatorColor="@color/colorNGYellow"
+            app:tabMode="fixed"
+            app:tabSelectedTextColor="@color/colorNGYellow"
+            app:tabTextColor="@android:color/white" />
+
+        <android.support.v4.view.ViewPager
+            android:id="@+id/vp_activity_main_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </LinearLayout>
 
     <LinearLayout
         android:id="@+id/ll_activity_main_loading"

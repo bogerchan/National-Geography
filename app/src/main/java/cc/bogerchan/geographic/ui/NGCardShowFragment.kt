@@ -25,6 +25,7 @@ import cc.bogerchan.geographic.R
 import cc.bogerchan.geographic.dao.NGCardData
 import cc.bogerchan.geographic.util.FetchStatus
 import cc.bogerchan.geographic.util.Timber
+import cc.bogerchan.geographic.util.dp2px
 import cc.bogerchan.geographic.viewmodel.FavoriteCardFlowViewModel
 import cc.bogerchan.geographic.viewmodel.MainUIViewModel
 import cc.bogerchan.geographic.viewmodel.NGCardShowViewModel
@@ -120,7 +121,7 @@ class NGCardShowFragment : Fragment() {
     private val tvTitle by bindView<TextView>(R.id.gtv_fragment_ng_card_show_intro_title)
     private val tvPage by bindView<TextView>(R.id.tv_fragment_ng_card_show_intro_page)
     private val tvContent by bindView<TextView>(R.id.tv_fragment_ng_card_show_intro_content)
-    private val vMenuDivider by bindView<View>(R.id.v_fragment_ng_card_show_menu_divider)
+    private val vMenuDividerTop by bindView<View>(R.id.v_fragment_ng_card_show_menu_divider_top)
     private val llShare by bindView<LinearLayout>(R.id.ll_fragment_ng_card_show_menu_share)
     private val llSave by bindView<LinearLayout>(R.id.ll_fragment_ng_card_show_menu_save)
     private val llFav by bindView<LinearLayout>(R.id.ll_fragment_ng_card_show_menu_fav)
@@ -153,6 +154,7 @@ class NGCardShowFragment : Fragment() {
     }
 
     private fun initViews() {
+        vpContent.pageMargin = context.dp2px(15).toInt()
         vpContent.addOnPageChangeListener(object : ViewPager.SimpleOnPageChangeListener() {
             override fun onPageSelected(position: Int) {
                 val adapter = vpContent.adapter as NGCardShowPagerAdapter
@@ -171,7 +173,7 @@ class NGCardShowFragment : Fragment() {
                 }
             }
         })
-        val divider = vMenuDivider
+        val divider = vMenuDividerTop
         llBottom.viewTreeObserver.addOnGlobalLayoutListener(object : ViewTreeObserver.OnGlobalLayoutListener {
             override fun onGlobalLayout() {
                 llBottom.viewTreeObserver.removeOnGlobalLayoutListener(this)
@@ -195,7 +197,7 @@ class NGCardShowFragment : Fragment() {
                 }
                 getString(R.string.ic_double_arrow_down) -> {
                     mPendingMenuAnimator?.cancel()
-                    mPendingMenuAnimator = ObjectAnimator.ofFloat(llBottom, "translationY", llBottom.translationY, llBottom.height - vMenuDivider.top.toFloat()).apply {
+                    mPendingMenuAnimator = ObjectAnimator.ofFloat(llBottom, "translationY", llBottom.translationY, llBottom.height - vMenuDividerTop.top.toFloat()).apply {
                         duration = 400
                         interpolator = OvershootInterpolator()
                         start()
