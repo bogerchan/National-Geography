@@ -15,10 +15,7 @@ import android.support.v4.util.ArraySet
 import android.support.v4.view.PagerAdapter
 import android.support.v4.view.ViewPager
 import android.view.*
-import android.view.animation.AlphaAnimation
-import android.view.animation.Animation
-import android.view.animation.AnimationUtils
-import android.view.animation.OvershootInterpolator
+import android.view.animation.*
 import android.widget.LinearLayout
 import android.widget.TextView
 import cc.bogerchan.geographic.R
@@ -188,7 +185,7 @@ class NGCardShowFragment : Fragment() {
                 getString(R.string.ic_more) -> {
                     mPendingMenuAnimator?.cancel()
                     mPendingMenuAnimator = ObjectAnimator.ofFloat(llBottom, "translationY", llBottom.translationY, 0F).apply {
-                        duration = 400
+                        duration = 300
                         interpolator = OvershootInterpolator()
                         start()
                     }
@@ -198,7 +195,7 @@ class NGCardShowFragment : Fragment() {
                 getString(R.string.ic_double_arrow_down) -> {
                     mPendingMenuAnimator?.cancel()
                     mPendingMenuAnimator = ObjectAnimator.ofFloat(llBottom, "translationY", llBottom.translationY, llBottom.height - vMenuDividerTop.top.toFloat()).apply {
-                        duration = 400
+                        duration = 300
                         interpolator = OvershootInterpolator()
                         start()
                     }
