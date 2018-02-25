@@ -30,8 +30,8 @@
     <string name="menu_duty">免責聲明</string>
     <string name="menu_license">開源許可</string>
     <string name="menu_author">聯絡作者</string>
-    <string name="text_splash_title_1">國家地理</string>
-    <string name="text_splash_title_2">聚合閱讀</string>
+    <string name="text_splash_title_1">NG地理</string>
+    <string name="text_splash_title_2">與世界相遇</string>
     <string name="text_mail_subject" formatted="false">程式(%s - %s)的問題反饋</string>
     <string name="text_duty">
         <![CDATA[

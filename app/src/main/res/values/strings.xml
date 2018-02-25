@@ -29,8 +29,8 @@
     <string name="menu_duty">免责声明</string>
     <string name="menu_license">开源许可</string>
     <string name="menu_author">联系作者</string>
-    <string name="text_splash_title_1">国家地理</string>
-    <string name="text_splash_title_2">聚合阅读</string>
+    <string name="text_splash_title_1">NG地理</string>
+    <string name="text_splash_title_2">与世界相遇</string>
     <string name="text_mail_subject" formatted="false">应用(%s - %s)的问题反馈</string>
     <string name="text_duty">
         <![CDATA[
