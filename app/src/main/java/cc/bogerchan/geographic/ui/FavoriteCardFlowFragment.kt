@@ -17,8 +17,8 @@ import android.view.animation.OvershootInterpolator
 import android.widget.LinearLayout
 import cc.bogerchan.geographic.R
 import cc.bogerchan.geographic.adapter.FavoriteCardFlowAdapter
-import cc.bogerchan.geographic.util.dp2px
 import cc.bogerchan.geographic.util.FetchStatus
+import cc.bogerchan.geographic.util.dp2px
 import cc.bogerchan.geographic.viewmodel.FavoriteCardFlowViewModel
 import cc.bogerchan.geographic.viewmodel.MainUIViewModel
 import cc.bogerchan.geographic.viewmodel.NGCardShowViewModel
@@ -75,8 +75,7 @@ class FavoriteCardFlowFragment : Fragment() {
     private val mCardDataAdapter by lazy { FavoriteCardFlowAdapter() }
 
     @SuppressLint("InflateParams")
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?)
-            = inflater?.inflate(R.layout.fragment_favorite_card_flow, null)?.apply {
+    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?) = inflater?.inflate(R.layout.fragment_favorite_card_flow, null)?.apply {
         llError = findViewById(R.id.ll_fragment_favorite_card_flow_error)
         llLoading = findViewById(R.id.ll_fragment_favorite_card_flow_loading)
         trlContent = findViewById(R.id.trl_fragment_favorite_card_flow)
@@ -163,6 +162,7 @@ class FavoriteCardFlowFragment : Fragment() {
     private fun performCardItemClicked(position: Int) {
         mMainUIViewHolder.uiAction.value = MainUIViewModel.UIAction.GO_TO_NG_SHOW_PAGE
         mNGCardShowViewModel.cardData.value = mCardDataAdapter.cardData[position]
+                .let { it.copy(cardElements = it.cardElements?.toMutableList()) }
     }
 
     private fun bindViewModels() {
@@ -215,23 +215,10 @@ class FavoriteCardFlowFragment : Fragment() {
                 }
             }
         })
-        mFavoriteCardViewModel.ngCardElementUpdate.observe(this, Observer { resp ->
-            when (resp?.first) {
-                FetchStatus.SUCCESS -> {
-                    mCardDataAdapter.cardData = resp.second
-                }
-                FetchStatus.ERROR -> {
-                    mFavoriteCardViewModel.uiState.value = FavoriteCardFlowViewModel.UIState.ERROR
-                }
-                else -> {
-                }
-            }
-        })
     }
 
     private fun unbindViewModels() {
         mFavoriteCardViewModel.uiState.removeObservers(this)
         mFavoriteCardViewModel.cardDataList.removeObservers(this)
-        mFavoriteCardViewModel.ngCardElementUpdate.removeObservers(this)
     }
 }

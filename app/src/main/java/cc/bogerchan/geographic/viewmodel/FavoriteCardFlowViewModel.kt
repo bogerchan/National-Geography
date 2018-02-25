@@ -14,51 +14,40 @@ import java.lang.UnsupportedOperationException
  * Created by Boger Chan on 2018/1/31.
  */
 class FavoriteCardFlowViewModel : ViewModel() {
+
     enum class UIState {
         LOADING, ERROR, REFRESH, FINISH_LOADING, FINISH_REFRESH
     }
 
-    enum class FetchType {
-        ALL
-    }
-
     enum class OperationType {
-        ADD, REMOVE
+        FETCH, ADD, REMOVE
     }
 
     val uiState = MutableLiveData<UIState>()
     private val mFavoriteRepository = FavoriteRepository()
 
-    private val mFetchType by lazy { MutableLiveData<FetchType>() }
+    private val mCardOperation by lazy { MutableLiveData<Pair<OperationType, NGCardElementData?>>() }
     val cardDataList: LiveData<Pair<FetchStatus, List<NGCardData>>> by lazy {
-        Transformations.switchMap(mFetchType, {
-            return@switchMap when (mFetchType.value) {
-                FetchType.ALL -> mFavoriteRepository.fetchCardDataList()
-                else -> throw UnsupportedOperationException("Unknown error type!")
-            }
-        })
-    }
-    private val mNGCardElementOperation by lazy { MutableLiveData<Pair<OperationType, NGCardElementData>>() }
-    val ngCardElementUpdate: LiveData<Pair<FetchStatus, List<NGCardData>>> by lazy {
-        Transformations.switchMap(mNGCardElementOperation, {
-            return@switchMap when (it.first) {
-                OperationType.ADD -> mFavoriteRepository.addNGCardElementData(it.second)
-                OperationType.REMOVE -> mFavoriteRepository.removeNGCardElementData(it.second)
+        Transformations.switchMap(mCardOperation, {
+            return@switchMap when (mCardOperation.value?.first) {
+                OperationType.FETCH -> mFavoriteRepository.fetchCardDataList()
+                OperationType.ADD -> mFavoriteRepository.addNGCardElementData(it.second!!)
+                OperationType.REMOVE -> mFavoriteRepository.removeNGCardElementData(it.second!!)
                 else -> throw UnsupportedOperationException("Unknown error type!")
             }
         })
     }
 
     fun fetchCardDataList() {
-        mFetchType.value = FetchType.ALL
+        mCardOperation.value = Pair(OperationType.FETCH, null)
     }
 
     fun addNGCardElementData(ngCardElementData: NGCardElementData) {
-        mNGCardElementOperation.value = Pair(OperationType.ADD, ngCardElementData)
+        mCardOperation.value = Pair(OperationType.ADD, ngCardElementData)
     }
 
     fun removeNGCardElementData(ngCardElementData: NGCardElementData) {
-        mNGCardElementOperation.value = Pair(OperationType.REMOVE, ngCardElementData)
+        mCardOperation.value = Pair(OperationType.REMOVE, ngCardElementData)
     }
 
     override fun onCleared() {

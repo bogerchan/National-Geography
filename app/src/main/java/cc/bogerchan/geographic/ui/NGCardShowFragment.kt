@@ -15,11 +15,14 @@ import android.support.v4.util.ArraySet
 import android.support.v4.view.PagerAdapter
 import android.support.v4.view.ViewPager
 import android.view.*
-import android.view.animation.*
+import android.view.animation.AlphaAnimation
+import android.view.animation.Animation
+import android.view.animation.AnimationUtils
+import android.view.animation.OvershootInterpolator
 import android.widget.LinearLayout
 import android.widget.TextView
 import cc.bogerchan.geographic.R
-import cc.bogerchan.geographic.dao.NGCardData
+import cc.bogerchan.geographic.dao.NGCardElementData
 import cc.bogerchan.geographic.util.FetchStatus
 import cc.bogerchan.geographic.util.Timber
 import cc.bogerchan.geographic.util.dp2px
@@ -41,14 +44,14 @@ import util.bindView
  */
 class NGCardShowFragment : Fragment() {
 
-    private class NGCardShowPagerAdapter(val viewPager: ViewPager, val cardData: NGCardData, val onClickListener: (View) -> Unit) : PagerAdapter() {
+    private class NGCardShowPagerAdapter(val viewPager: ViewPager, val cardDataElements: List<NGCardElementData>, val onClickListener: (View) -> Unit) : PagerAdapter() {
 
         private val mRecyclerPool = arrayListOf<GestureFrameLayout>()
 
         override fun isViewFromObject(view: View?, `object`: Any?) = view == `object`
 
         override fun getCount(): Int {
-            return cardData.cardElements!!.size
+            return cardDataElements.size
         }
 
         override fun instantiateItem(container: ViewGroup?, position: Int): Any {
@@ -56,7 +59,7 @@ class NGCardShowFragment : Fragment() {
                 Timber.d("Use recycler SimpleDraweeView instance.")
                 return mRecyclerPool.removeAt(0).apply {
                     (getChildAt(0) as SimpleDraweeView).apply {
-                        setImageURI(cardData.cardElements!![position].imgUrl)
+                        setImageURI(cardDataElements[position].imgUrl)
                     }
                     container!!.addView(this, ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT))
                 }
@@ -67,14 +70,14 @@ class NGCardShowFragment : Fragment() {
                     hierarchy.apply {
                         actualImageScaleType = ScalingUtils.ScaleType.FIT_CENTER
                         setPlaceholderImage(R.mipmap.placeholder_loading, ScalingUtils.ScaleType.FIT_CENTER)
-                        setImageURI(cardData.cardElements!![position].imgUrl)
+                        setImageURI(cardDataElements[position].imgUrl)
                     }
                 }, ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT))
                 container.addView(this, ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT))
             }
         }
 
-        fun getCardElement(position: Int) = cardData.cardElements!![position]
+        fun getCardElement(position: Int) = cardDataElements[position]
 
         override fun destroyItem(container: ViewGroup?, position: Int, `object`: Any?) {
             container ?: return
@@ -219,12 +222,13 @@ class NGCardShowFragment : Fragment() {
 
     private fun bindViewModels() {
         mNGCardShowViewModel.cardData.observe(this, Observer { data ->
-            if (data?.cardElements == null || data.cardElements!!.isEmpty()) {
+            val cardElements = data?.cardElements
+            if (cardElements == null || cardElements.isEmpty()) {
                 Snackbar.make(llBottom, R.string.tip_empty_data, Snackbar.LENGTH_SHORT).show()
                 mMainUIViewModel.menuState.value = MainUIViewModel.MenuState.BACK_FROM_RETURN
                 return@Observer
             }
-            vpContent.adapter = NGCardShowPagerAdapter(vpContent, data, {
+            vpContent.adapter = NGCardShowPagerAdapter(vpContent, cardElements.toList(), {
                 mMainUIViewModel.isTitleShowing.value = when (mMainUIViewModel.isTitleShowing.value) {
                     false -> true
                     else -> false
@@ -256,54 +260,30 @@ class NGCardShowFragment : Fragment() {
                         play(ObjectAnimator.ofFloat(llBottom, "alpha", llBottom.alpha, 0F))
                                 .with(ObjectAnimator.ofFloat(tvMenuIndicator, "alpha", llBottom.alpha, 0F))
                     }.apply {
-                        duration = 200
-                        addListener(object : AnimatorListenerAdapter() {
-                            override fun onAnimationEnd(animation: Animator?) {
-                                llBottom.visibility = View.INVISIBLE
-                                tvMenuIndicator.visibility = View.INVISIBLE
+                                duration = 200
+                                addListener(object : AnimatorListenerAdapter() {
+                                    override fun onAnimationEnd(animation: Animator?) {
+                                        llBottom.visibility = View.INVISIBLE
+                                        tvMenuIndicator.visibility = View.INVISIBLE
+                                    }
+                                })
+                                start()
                             }
-                        })
-                        start()
-                    }
                 }
                 else -> {
                     AnimatorSet().apply {
                         play(ObjectAnimator.ofFloat(llBottom, "alpha", llBottom.alpha, 1F))
                                 .with(ObjectAnimator.ofFloat(tvMenuIndicator, "alpha", llBottom.alpha, 1F))
                     }.apply {
-                        duration = 200
-                        addListener(object : AnimatorListenerAdapter() {
-                            override fun onAnimationStart(animation: Animator?) {
-                                llBottom.visibility = View.VISIBLE
-                                tvMenuIndicator.visibility = View.VISIBLE
+                                duration = 200
+                                addListener(object : AnimatorListenerAdapter() {
+                                    override fun onAnimationStart(animation: Animator?) {
+                                        llBottom.visibility = View.VISIBLE
+                                        tvMenuIndicator.visibility = View.VISIBLE
+                                    }
+                                })
+                                start()
                             }
-                        })
-                        start()
-                    }
-                }
-            }
-        })
-        mFavoriteCardFlowViewModel.ngCardElementUpdate.observe(this, Observer {
-            if (it?.first == null) {
-                return@Observer
-            }
-            when (it.first) {
-                FetchStatus.SUCCESS -> {
-                    mFavoriteItems.clear()
-                    if (it.second.isNotEmpty()) {
-                        it.second[0].cardElements?.mapTo(mFavoriteItems, { it.id })
-                    }
-                    val cardElements = mNGCardShowViewModel.cardData.value?.cardElements;
-                    if (cardElements == null || cardElements.isEmpty()) {
-                        Snackbar.make(llBottom, R.string.tip_empty_data, Snackbar.LENGTH_SHORT).show()
-                        mMainUIViewModel.menuState.value = MainUIViewModel.MenuState.BACK_FROM_RETURN
-                    } else {
-                        cardElements.get(vpContent.currentItem).apply {
-                            tvFavIcon.text = if (mFavoriteItems.contains(id)) getString(R.string.ic_fav_solid) else getString(R.string.ic_fav)
-                        }
-                    }
-                }
-                else -> {
                 }
             }
         })
@@ -314,12 +294,17 @@ class NGCardShowFragment : Fragment() {
             when (it.first) {
                 FetchStatus.SUCCESS -> {
                     mFavoriteItems.clear()
-                    if (it.second.isEmpty()) {
-                        return@Observer
+                    if (it.second.isNotEmpty()) {
+                        it.second[0].cardElements?.mapTo(mFavoriteItems, { it.id })
                     }
-                    it.second[0].cardElements?.mapTo(mFavoriteItems, { it.id })
-                    mNGCardShowViewModel.cardData.value?.cardElements?.get(vpContent.currentItem)?.apply {
-                        tvFavIcon.text = if (mFavoriteItems.contains(id)) getString(R.string.ic_fav_solid) else getString(R.string.ic_fav)
+                    val cardElements = (vpContent.adapter as NGCardShowPagerAdapter).cardDataElements
+                    if (cardElements.isEmpty()) {
+                        Snackbar.make(llBottom, R.string.tip_empty_data, Snackbar.LENGTH_SHORT).show()
+                        mMainUIViewModel.menuState.value = MainUIViewModel.MenuState.BACK_FROM_RETURN
+                    } else {
+                        cardElements[vpContent.currentItem].apply {
+                            tvFavIcon.text = if (mFavoriteItems.contains(id)) getString(R.string.ic_fav_solid) else getString(R.string.ic_fav)
+                        }
                     }
                 }
                 else -> {
@@ -331,7 +316,6 @@ class NGCardShowFragment : Fragment() {
     private fun unbindViewModels() {
         mNGCardShowViewModel.cardData.removeObservers(this)
         mNGCardShowViewModel.isMenuShowing.removeObservers(this)
-        mFavoriteCardFlowViewModel.ngCardElementUpdate.removeObservers(this)
         mFavoriteCardFlowViewModel.cardDataList.removeObservers(this)
     }
 
