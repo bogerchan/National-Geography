@@ -169,5 +169,5 @@
     <string name="content_file_permission_dialog">应用保存和分享图片需要文件读写权限，禁用文件读写权限将导致相关功能不可用</string>
     <string name="text_file_permission_dialog_positive_button">开始申请</string>
     <string name="text_file_permission_dialog_negative_button">以后再说</string>
-    <string name="tip_request_file_permissions_failed">文件读写权限申请失败</string>
+    <string name="tip_request_file_permissions_failed">没有文件读写权限，部分功能受限</string>
 </resources>

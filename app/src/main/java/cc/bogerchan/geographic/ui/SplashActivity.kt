@@ -78,7 +78,7 @@ class SplashActivity : AppCompatActivity() {
         if (!CommonUtil.hasPermission(this, android.Manifest.permission.READ_EXTERNAL_STORAGE) ||
                 !CommonUtil.hasPermission(this, android.Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
             if (ActivityCompat.shouldShowRequestPermissionRationale(this, android.Manifest.permission.READ_EXTERNAL_STORAGE)
-                    && ActivityCompat.shouldShowRequestPermissionRationale(this, android.Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
+                    || ActivityCompat.shouldShowRequestPermissionRationale(this, android.Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
                 AlertDialog.Builder(this)
                         .setTitle(R.string.title_file_permission_dialog)
                         .setMessage(R.string.content_file_permission_dialog)
@@ -88,7 +88,7 @@ class SplashActivity : AppCompatActivity() {
                     handleJump()
                 }).show()
             } else {
-                handleJump()
+                requestFilePermissions()
             }
         } else {
             handleJump()
