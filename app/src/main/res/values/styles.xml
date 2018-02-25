@@ -95,10 +95,7 @@
     <style name="AppTheme.SplashText">
         <item name="android:paddingLeft">10dp</item>
         <item name="android:paddingRight">10dp</item>
-        <item name="android:paddingTop">5dp</item>
-        <item name="android:paddingBottom">5dp</item>
-        <item name="android:textColor">@android:color/white</item>
-        <item name="android:background">@drawable/bg_item_ng_card_text</item>
+        <item name="android:textColor">@color/colorNGYellow50</item>
         <item name="android:maxLines">1</item>
         <item name="android:ellipsize">end</item>
     </style>

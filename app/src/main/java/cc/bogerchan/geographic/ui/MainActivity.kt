@@ -4,6 +4,7 @@ import android.animation.*
 import android.annotation.SuppressLint
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
+import android.content.Intent
 import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
@@ -95,7 +96,10 @@ class MainActivity : AppCompatActivity() {
                 Snackbar.make(vpContent, R.string.tip_quit_confirm, Snackbar.LENGTH_SHORT).show()
             }
             else -> {
-                super.onBackPressed()
+                startActivity(Intent(Intent.ACTION_MAIN).apply {
+                    flags = Intent.FLAG_ACTIVITY_NEW_TASK
+                    addCategory(Intent.CATEGORY_HOME)
+                })
             }
         }
     }

@@ -218,6 +218,20 @@ class NGCardShowFragment : Fragment() {
                 mFavoriteCardFlowViewModel.removeNGCardElementData(cardDataElements[vpContent.currentItem])
             }
         }
+        llSave.setOnClickListener {
+            val cardDataElements = mNGCardShowViewModel.cardData.value?.cardElements
+            if (cardDataElements == null || cardDataElements.isEmpty()) {
+                return@setOnClickListener
+            }
+            mNGCardShowViewModel.performOperationSave(vpContent, cardDataElements[vpContent.currentItem])
+        }
+        llShare.setOnClickListener {
+            val cardDataElements = mNGCardShowViewModel.cardData.value?.cardElements
+            if (cardDataElements == null || cardDataElements.isEmpty()) {
+                return@setOnClickListener
+            }
+            mNGCardShowViewModel.performOperationShare(vpContent, cardDataElements[vpContent.currentItem])
+        }
     }
 
     private fun bindViewModels() {

@@ -2,9 +2,12 @@ package cc.bogerchan.geographic.util
 
 import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Build
+import android.support.v4.content.ContextCompat
 import android.text.Html
+import android.text.TextUtils
 import android.util.TypedValue
 import android.view.View
 import android.view.ViewGroup
@@ -14,6 +17,10 @@ import com.google.gson.GsonBuilder
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.io.Closeable
+import java.io.IOException
+import java.security.MessageDigest
+import java.security.NoSuchAlgorithmException
 import java.util.concurrent.TimeUnit
 
 /**
@@ -26,8 +33,7 @@ object CommonUtil {
                 .addSerializationExclusionStrategy(object : ExclusionStrategy {
                     override fun shouldSkipClass(clazz: Class<*>?) = false
 
-                    override fun shouldSkipField(f: FieldAttributes)
-                            = f.getAnnotation(Transient::class.java) != null
+                    override fun shouldSkipField(f: FieldAttributes) = f.getAnnotation(Transient::class.java) != null
                             || f.name.endsWith("\$delegate")
                 })
                 .create()
@@ -58,7 +64,36 @@ object CommonUtil {
                     .build())
             .baseUrl(baseUrl)
             .addConverterFactory(GsonConverterFactory.create(gson))
-            .build()
+            .build()!!
+
+    fun closeQuietly(closeable: Closeable?) {
+        try {
+            closeable?.close()
+        } catch (ignore: IOException) {
+        }
+    }
+
+    fun md5(str: String): String {
+        if (TextUtils.isEmpty(str)) {
+            return ""
+        }
+        return try {
+            val sb = StringBuilder()
+            MessageDigest.getInstance("MD5").digest(str.toByteArray()).forEach {
+                val hex = Integer.toHexString(it.toInt() and 0xff)
+                if (hex.length < 2) {
+                    sb.append('0')
+                }
+                sb.append(hex)
+            }
+            sb.toString()
+        } catch (e: NoSuchAlgorithmException) {
+            Timber.e(e)
+            ""
+        }
+    }
+
+    fun hasPermission(context: Context, permission: String) = ContextCompat.checkSelfPermission(context, permission) == PackageManager.PERMISSION_GRANTED
 }
 
 fun Context.dp2px(dp: Int): Float {

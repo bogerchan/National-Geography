@@ -76,8 +76,7 @@ class NGCardFlowFragment : Fragment() {
     private val mCardDataAdapter by lazy { NGCardFlowAdapter() }
 
     @SuppressLint("InflateParams")
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?)
-            = inflater?.inflate(R.layout.fragment_ng_card_flow, null)?.apply {
+    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?) = inflater?.inflate(R.layout.fragment_ng_card_flow, null)?.apply {
         // bind view, butter-knife is not suitable for this scene.
         llError = findViewById(R.id.ll_fragment_ng_card_flow_error)
         llLoading = findViewById(R.id.ll_fragment_ng_card_flow_loading)
@@ -90,6 +89,7 @@ class NGCardFlowFragment : Fragment() {
         initViews()
         bindViewModels()
         if (savedInstanceState == null) {
+            mNGCardFlowViewModel.uiState.value = NGCardFlowViewModel.UIState.LOADING
             mNGCardFlowViewModel.startFetch(NGCardFlowViewModel.FetchType.FROM_FIRST)
         }
     }

@@ -160,4 +160,14 @@
     <string name="text_ng_card_show_content" formatted="false">%s (摄影: %s)</string>
     <string name="text_ng_favorite_set">国家地理收藏夹</string>
     <string name="tip_empty_data">没有数据了</string>
+    <string name="tip_no_file_permissions">没有文件读写权限</string>
+    <string name="tip_image_exist">文件已经存在（%s）</string>
+    <string name="tip_save_image_error">保存图片失败，请重试</string>
+    <string name="tip_save_image_successfully">图片已保存到 %s</string>
+    <string name="tip_prepare_image">请稍等，分享图片准备中…</string>
+    <string name="title_file_permission_dialog">请求文件读写权限</string>
+    <string name="content_file_permission_dialog">应用保存和分享图片需要文件读写权限，禁用文件读写权限将导致相关功能不可用</string>
+    <string name="text_file_permission_dialog_positive_button">开始申请</string>
+    <string name="text_file_permission_dialog_negative_button">以后再说</string>
+    <string name="tip_request_file_permissions_failed">文件读写权限申请失败</string>
 </resources>
