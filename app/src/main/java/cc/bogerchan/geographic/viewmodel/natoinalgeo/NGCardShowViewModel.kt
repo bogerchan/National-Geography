@@ -1,4 +1,4 @@
-package cc.bogerchan.geographic.viewmodel
+package cc.bogerchan.geographic.viewmodel.natoinalgeo
 
 import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.ViewModel

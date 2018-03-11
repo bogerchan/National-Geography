@@ -15,6 +15,7 @@ import com.google.gson.ExclusionStrategy
 import com.google.gson.FieldAttributes
 import com.google.gson.GsonBuilder
 import okhttp3.OkHttpClient
+import retrofit2.Converter
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.io.Closeable
@@ -57,13 +58,12 @@ object CommonUtil {
         }
     }
 
-    fun obtainRetrofit(baseUrl: String) = Retrofit.Builder()
+    fun obtainRetrofit(baseUrl: String, converterFactory: Converter.Factory = GsonConverterFactory.create(gson)) = Retrofit.Builder()
             .client(OkHttpClient.Builder()
                     .readTimeout(60, TimeUnit.MINUTES)
                     .connectTimeout(60, TimeUnit.MINUTES)
                     .build())
-            .baseUrl(baseUrl)
-            .addConverterFactory(GsonConverterFactory.create(gson))
+            .baseUrl(baseUrl).addConverterFactory(converterFactory)
             .build()!!
 
     fun closeQuietly(closeable: Closeable?) {
@@ -93,7 +93,9 @@ object CommonUtil {
         }
     }
 
-    fun hasPermission(context: Context, permission: String) = ContextCompat.checkSelfPermission(context, permission) == PackageManager.PERMISSION_GRANTED
+    fun hasPermission(context: Context, permission: String)
+            = ContextCompat.checkSelfPermission(context, permission) == PackageManager.PERMISSION_GRANTED
+
 }
 
 fun Context.dp2px(dp: Int): Float {

@@ -1,4 +1,4 @@
-package cc.bogerchan.geographic.ui
+package cc.bogerchan.geographic.ui.nationalgeo
 
 import android.animation.Animator
 import android.animation.AnimatorSet
@@ -8,6 +8,7 @@ import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import android.graphics.Rect
 import android.os.Bundle
+import android.support.design.widget.Snackbar
 import android.support.v4.app.Fragment
 import android.support.v4.content.res.ResourcesCompat
 import android.support.v7.widget.LinearLayoutManager
@@ -16,12 +17,12 @@ import android.view.*
 import android.view.animation.OvershootInterpolator
 import android.widget.LinearLayout
 import cc.bogerchan.geographic.R
-import cc.bogerchan.geographic.adapter.FavoriteCardFlowAdapter
+import cc.bogerchan.geographic.adapter.NGCardFlowAdapter
 import cc.bogerchan.geographic.util.FetchStatus
 import cc.bogerchan.geographic.util.dp2px
-import cc.bogerchan.geographic.viewmodel.FavoriteCardFlowViewModel
 import cc.bogerchan.geographic.viewmodel.MainUIViewModel
-import cc.bogerchan.geographic.viewmodel.NGCardShowViewModel
+import cc.bogerchan.geographic.viewmodel.natoinalgeo.NGCardFlowViewModel
+import cc.bogerchan.geographic.viewmodel.natoinalgeo.NGCardShowViewModel
 import com.lcodecore.tkrefreshlayout.RefreshListenerAdapter
 import com.lcodecore.tkrefreshlayout.TwinklingRefreshLayout
 import com.lcodecore.tkrefreshlayout.footer.BallPulseView
@@ -33,7 +34,7 @@ import java.lang.ref.WeakReference
 /**
  * Created by Boger Chan on 2018/1/28.
  */
-class FavoriteCardFlowFragment : Fragment() {
+class NGCardFlowFragment : Fragment() {
 
     private class ScaleAnimatorHelper(val scaleTo: Float) {
         private var mPendingAnimator: Animator? = null
@@ -69,26 +70,27 @@ class FavoriteCardFlowFragment : Fragment() {
     private lateinit var llLoading: LinearLayout
     private lateinit var trlContent: TwinklingRefreshLayout
     private lateinit var rvContent: RecyclerView
-    private val mFavoriteCardViewModel by lazy { ViewModelProviders.of(activity).get(FavoriteCardFlowViewModel::class.java) }
-    private val mMainUIViewHolder by lazy { ViewModelProviders.of(activity).get(MainUIViewModel::class.java) }
+    private val mNGCardFlowViewModel by lazy { ViewModelProviders.of(activity).get(NGCardFlowViewModel::class.java) }
     private val mNGCardShowViewModel by lazy { ViewModelProviders.of(activity).get(NGCardShowViewModel::class.java) }
-    private val mCardDataAdapter by lazy { FavoriteCardFlowAdapter() }
+    private val mMainUIViewHolder by lazy { ViewModelProviders.of(activity).get(MainUIViewModel::class.java) }
+    private val mCardDataAdapter by lazy { NGCardFlowAdapter() }
 
     @SuppressLint("InflateParams")
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?) = inflater?.inflate(R.layout.fragment_favorite_card_flow, null)?.apply {
-        llError = findViewById(R.id.ll_fragment_favorite_card_flow_error)
-        llLoading = findViewById(R.id.ll_fragment_favorite_card_flow_loading)
-        trlContent = findViewById(R.id.trl_fragment_favorite_card_flow)
-        rvContent = findViewById(R.id.rv_fragment_favorite_card_flow)
+    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?) = inflater?.inflate(R.layout.fragment_ng_card_flow, null)?.apply {
+        // bind view, butter-knife is not suitable for this scene.
+        llError = findViewById(R.id.ll_fragment_ng_card_flow_error)
+        llLoading = findViewById(R.id.ll_fragment_ng_card_flow_loading)
+        trlContent = findViewById(R.id.trl_fragment_ng_card_flow)
+        rvContent = findViewById(R.id.rv_fragment_ng_card_flow)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         initViews()
         bindViewModels()
-        mFavoriteCardViewModel.uiState.value = FavoriteCardFlowViewModel.UIState.LOADING
-        if (mFavoriteCardViewModel.cardDataList.value == null) {
-            mFavoriteCardViewModel.fetchCardDataList()
+        if (savedInstanceState == null) {
+            mNGCardFlowViewModel.uiState.value = NGCardFlowViewModel.UIState.LOADING
+            mNGCardFlowViewModel.startFetch(NGCardFlowViewModel.FetchType.FROM_FIRST)
         }
     }
 
@@ -118,7 +120,7 @@ class FavoriteCardFlowFragment : Fragment() {
                 override fun onSingleTapConfirmed(e: MotionEvent?): Boolean {
                     e ?: return false
                     rvContent.findChildViewUnder(e.x, e.y)?.let {
-                        performCardItemClicked(rvContent.getChildAdapterPosition(it))
+                        performCardItemClicked(it, rvContent.getChildAdapterPosition(it))
                     }
                     return false
                 }
@@ -148,77 +150,107 @@ class FavoriteCardFlowFragment : Fragment() {
         ballPulseView.setNormalColor(ResourcesCompat.getColor(resources, R.color.colorAccent20, activity.theme))
         ballPulseView.setAnimatingColor(ResourcesCompat.getColor(resources, R.color.colorAccent20, activity.theme))
         trlContent.setBottomView(ballPulseView)
-        trlContent.setEnableLoadmore(false)
         trlContent.setOnRefreshListener(object : RefreshListenerAdapter() {
 
             override fun onRefresh(refreshLayout: TwinklingRefreshLayout?) {
-                mFavoriteCardViewModel.uiState.value = FavoriteCardFlowViewModel.UIState.REFRESH
-                mFavoriteCardViewModel.fetchCardDataList()
+                mNGCardFlowViewModel.uiState.value = NGCardFlowViewModel.UIState.REFRESH
+                mNGCardFlowViewModel.startFetch(NGCardFlowViewModel.FetchType.FROM_FIRST)
+            }
+
+            override fun onLoadMore(refreshLayout: TwinklingRefreshLayout?) {
+                mNGCardFlowViewModel.uiState.value = NGCardFlowViewModel.UIState.LOAD_MORE
+                mNGCardFlowViewModel.startFetch(NGCardFlowViewModel.FetchType.FOR_NEXT)
             }
         })
-        llError.setOnClickListener { mFavoriteCardViewModel.fetchCardDataList() }
+        llError.setOnClickListener { mNGCardFlowViewModel.startFetch(NGCardFlowViewModel.FetchType.FOR_NEXT) }
     }
 
-    private fun performCardItemClicked(position: Int) {
-        mMainUIViewHolder.uiAction.value = MainUIViewModel.UIAction.GO_TO_NG_SHOW_PAGE
-        mNGCardShowViewModel.cardData.value = mCardDataAdapter.cardData[position]
-                .let { it.copy(cardElements = it.cardElements?.toMutableList()) }
+    private fun performCardItemClicked(target: View, position: Int) {
+        mMainUIViewHolder.uiAction.value = MainUIViewModel.UIAction.LOADING
+        mNGCardFlowViewModel.startQueryCardDataElements(mCardDataAdapter.cardData[position])
     }
 
     private fun bindViewModels() {
-        mFavoriteCardViewModel.uiState.observe(this, Observer { uiState ->
+        mNGCardFlowViewModel.uiState.observe(this, Observer { uiState ->
             when (uiState) {
-                FavoriteCardFlowViewModel.UIState.LOADING -> {
+                NGCardFlowViewModel.UIState.LOADING -> {
                     llError.visibility = View.INVISIBLE
                     llLoading.visibility = View.VISIBLE
                     trlContent.visibility = View.INVISIBLE
                 }
-                FavoriteCardFlowViewModel.UIState.FINISH_LOADING -> {
-                    llError.visibility = View.INVISIBLE
-                    llLoading.visibility = View.INVISIBLE
-                    trlContent.visibility = View.VISIBLE
-                }
-                FavoriteCardFlowViewModel.UIState.ERROR -> {
+                NGCardFlowViewModel.UIState.ERROR -> {
                     llError.visibility = View.VISIBLE
                     llLoading.visibility = View.INVISIBLE
                     trlContent.visibility = View.INVISIBLE
                 }
-                FavoriteCardFlowViewModel.UIState.REFRESH -> {
+                NGCardFlowViewModel.UIState.REFRESH -> {
 //                    llError.visibility = View.INVISIBLE
 //                    llLoading.visibility = View.INVISIBLE
 //                    trlContent.visibility = View.VISIBLE
 //                    trlContent.startRefresh()
                 }
-                FavoriteCardFlowViewModel.UIState.FINISH_REFRESH -> {
+                NGCardFlowViewModel.UIState.LOAD_MORE -> {
+//                    llError.visibility = View.INVISIBLE
+//                    llLoading.visibility = View.INVISIBLE
+//                    trlContent.visibility = View.VISIBLE
+//                    trlContent.startLoadMore()
+                }
+                NGCardFlowViewModel.UIState.FINISH_LOADING -> {
+                    llError.visibility = View.INVISIBLE
+                    llLoading.visibility = View.INVISIBLE
+                    trlContent.visibility = View.VISIBLE
+                }
+                NGCardFlowViewModel.UIState.FINISH_REFRESH -> {
                     llError.visibility = View.INVISIBLE
                     llLoading.visibility = View.INVISIBLE
                     trlContent.visibility = View.VISIBLE
                     trlContent.finishRefreshing()
                 }
+                NGCardFlowViewModel.UIState.FINISH_LOAD_MORE -> {
+                    llError.visibility = View.INVISIBLE
+                    llLoading.visibility = View.INVISIBLE
+                    trlContent.visibility = View.VISIBLE
+                    trlContent.finishLoadmore()
+                }
             }
         })
-        mFavoriteCardViewModel.cardDataList.observe(this, Observer { resp ->
+        mNGCardFlowViewModel.cardDataList.observe(this, Observer { resp ->
             when (resp?.first) {
                 FetchStatus.SUCCESS -> {
-                    when (mFavoriteCardViewModel.uiState.value) {
-                        FavoriteCardFlowViewModel.UIState.LOADING -> mFavoriteCardViewModel.uiState.value = FavoriteCardFlowViewModel.UIState.FINISH_LOADING
-                        FavoriteCardFlowViewModel.UIState.REFRESH -> mFavoriteCardViewModel.uiState.value = FavoriteCardFlowViewModel.UIState.FINISH_REFRESH
-                        else -> {
-                        }
+                    mNGCardFlowViewModel.uiState.value = when (mNGCardFlowViewModel.uiState.value) {
+                        NGCardFlowViewModel.UIState.LOADING -> NGCardFlowViewModel.UIState.FINISH_LOADING
+                        NGCardFlowViewModel.UIState.REFRESH -> NGCardFlowViewModel.UIState.FINISH_REFRESH
+                        NGCardFlowViewModel.UIState.LOAD_MORE -> NGCardFlowViewModel.UIState.FINISH_LOAD_MORE
+                        else -> NGCardFlowViewModel.UIState.FINISH_LOADING
                     }
                     mCardDataAdapter.cardData = resp.second
                 }
                 FetchStatus.ERROR -> {
-                    mFavoriteCardViewModel.uiState.value = FavoriteCardFlowViewModel.UIState.ERROR
+                    mNGCardFlowViewModel.uiState.value = NGCardFlowViewModel.UIState.ERROR
                 }
                 else -> {
                 }
             }
         })
+        mNGCardFlowViewModel.cardDataWithElements.observe(this, Observer {
+            if (it == null) {
+                return@Observer
+            }
+            if (it.first == FetchStatus.ERROR) {
+                Snackbar.make(rvContent, R.string.tip_load_error, Snackbar.LENGTH_SHORT).show()
+                return@Observer
+            }
+            mMainUIViewHolder.uiAction.value = MainUIViewModel.UIAction.FINISH_LOADING
+            mMainUIViewHolder.uiAction.value = MainUIViewModel.UIAction.GO_TO_NG_SHOW_PAGE
+            mNGCardShowViewModel.cardData.value = it.second
+            mNGCardFlowViewModel.resetCardDataElements()
+        })
     }
 
     private fun unbindViewModels() {
-        mFavoriteCardViewModel.uiState.removeObservers(this)
-        mFavoriteCardViewModel.cardDataList.removeObservers(this)
+        mNGCardFlowViewModel.uiState.removeObservers(this)
+        mNGCardFlowViewModel.cardDataList.removeObservers(this)
+        mNGCardFlowViewModel.cardDataWithElements.removeObservers(this)
     }
+
 }

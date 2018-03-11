@@ -26,10 +26,14 @@ import android.widget.ScrollView
 import android.widget.TextView
 import cc.bogerchan.geographic.BuildConfig
 import cc.bogerchan.geographic.R
+import cc.bogerchan.geographic.ui.bing.BingDailyFragment
+import cc.bogerchan.geographic.ui.fav.FavoriteCardFlowFragment
+import cc.bogerchan.geographic.ui.nationalgeo.NGCardFlowFragment
+import cc.bogerchan.geographic.ui.nationalgeo.NGCardShowFragment
 import cc.bogerchan.geographic.util.CommonUtil
 import cc.bogerchan.geographic.view.GeoTextView
-import cc.bogerchan.geographic.viewmodel.FavoriteCardFlowViewModel
 import cc.bogerchan.geographic.viewmodel.MainUIViewModel
+import cc.bogerchan.geographic.viewmodel.fav.FavoriteCardFlowViewModel
 import util.bindView
 import java.util.*
 
@@ -205,7 +209,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun initViewPagerContent() {
         val vpContentData = arrayListOf(Pair<String, Fragment>(getString(R.string.tab_national_geography), NGCardFlowFragment()),
-//                Pair<String, Fragment>(getString(R.string.tab_bing_wallpaper), Fragment()),
+                Pair<String, Fragment>(getString(R.string.tab_bing_wallpaper), BingDailyFragment()),
                 Pair<String, Fragment>(getString(R.string.tab_favorite_gallery), FavoriteCardFlowFragment()))
         vpContent.adapter = object : FragmentPagerAdapter(supportFragmentManager) {
             override fun getItem(position: Int) = vpContentData[position].second

@@ -1,4 +1,4 @@
-package cc.bogerchan.geographic.ui
+package cc.bogerchan.geographic.ui.nationalgeo
 
 import android.animation.Animator
 import android.animation.AnimatorListenerAdapter
@@ -26,9 +26,9 @@ import cc.bogerchan.geographic.dao.NGCardElementData
 import cc.bogerchan.geographic.util.FetchStatus
 import cc.bogerchan.geographic.util.Timber
 import cc.bogerchan.geographic.util.dp2px
-import cc.bogerchan.geographic.viewmodel.FavoriteCardFlowViewModel
+import cc.bogerchan.geographic.viewmodel.fav.FavoriteCardFlowViewModel
 import cc.bogerchan.geographic.viewmodel.MainUIViewModel
-import cc.bogerchan.geographic.viewmodel.NGCardShowViewModel
+import cc.bogerchan.geographic.viewmodel.natoinalgeo.NGCardShowViewModel
 import com.alexvasilkov.gestures.GestureController
 import com.alexvasilkov.gestures.Settings
 import com.alexvasilkov.gestures.views.GestureFrameLayout

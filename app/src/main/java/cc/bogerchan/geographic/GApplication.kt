@@ -5,6 +5,8 @@ import android.app.Application
 import android.content.Context
 import android.os.Environment
 import android.text.TextUtils
+import android.util.DisplayMetrics
+import android.view.WindowManager
 import cc.bogerchan.geographic.util.Timber
 import com.facebook.drawee.backends.pipeline.Fresco
 import com.flurry.android.FlurryAgent
@@ -18,6 +20,10 @@ class GApplication : Application() {
     companion object {
         @SuppressLint("StaticFieldLeak")
         lateinit var app: Context
+
+        var screenWidth: Int = 0
+
+        var screenHeight: Int = 0
 
         val imageDir by lazy {
 
@@ -33,6 +39,12 @@ class GApplication : Application() {
     override fun onCreate() {
         super.onCreate()
         app = applicationContext
+        (GApplication.app.getSystemService(Context.WINDOW_SERVICE) as WindowManager).apply {
+            val outMetrics = DisplayMetrics()
+            defaultDisplay.getMetrics(outMetrics)
+            screenWidth = outMetrics.widthPixels
+            screenHeight = outMetrics.heightPixels
+        }
         initLog()
         Fresco.initialize(this)
         initFlurry()

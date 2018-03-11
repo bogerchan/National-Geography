@@ -1,4 +1,4 @@
-package cc.bogerchan.geographic.viewmodel
+package cc.bogerchan.geographic.viewmodel.fav
 
 import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.MutableLiveData
