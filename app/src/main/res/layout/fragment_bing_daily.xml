@@ -74,14 +74,30 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
-                <com.facebook.drawee.view.SimpleDraweeView
-                    android:id="@+id/sdv_fragment_bing_daily_image"
+                <FrameLayout
                     android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:visibility="invisible" />
+                    android:layout_height="wrap_content">
+                    <com.facebook.drawee.view.SimpleDraweeView
+                        android:id="@+id/sdv_fragment_bing_daily_image"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:visibility="invisible"
+                        android:layout_margin="20dp"
+                        app:actualImageScaleType="focusCrop" />
+                    <TextView
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="20dp"
+                        android:layout_width="match_parent"
+                        android:text="@string/tip_read_bing_article"
+                        android:gravity="center"
+                        android:layout_gravity="bottom"
+                        android:padding="5dp"
+                        android:textColor="@color/colorNGYellow"
+                        android:background="@color/colorPrimaryDark50"
+                        android:layout_height="wrap_content" />
+                </FrameLayout>
 
                 <WebView
-                    android:layout_margin="15dp"
                     android:id="@+id/wv_fragment_bing_daily_content"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

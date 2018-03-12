@@ -170,4 +170,5 @@
     <string name="text_file_permission_dialog_positive_button">开始申请</string>
     <string name="text_file_permission_dialog_negative_button">以后再说</string>
     <string name="tip_request_file_permissions_failed">没有文件读写权限，部分功能受限</string>
+    <string name="tip_read_bing_article">上拉阅读图文</string>
 </resources>

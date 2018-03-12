@@ -11,12 +11,12 @@ import android.support.v4.content.res.ResourcesCompat
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.webkit.WebSettings
+import android.view.ViewTreeObserver
 import android.webkit.WebView
+import android.widget.FrameLayout
 import android.widget.LinearLayout
 import cc.bogerchan.geographic.GApplication
 import cc.bogerchan.geographic.R
-import cc.bogerchan.geographic.util.BingStyleUtil
 import cc.bogerchan.geographic.viewmodel.BingDailyViewModel
 import com.facebook.drawee.backends.pipeline.Fresco
 import com.facebook.drawee.view.SimpleDraweeView
@@ -41,6 +41,7 @@ class BingDailyFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         loadData()
+        mBingDailyViewModel.prepareData()
     }
 
     private fun loadData() {
@@ -72,8 +73,14 @@ class BingDailyFragment : Fragment() {
 
     private fun bindViewModels() {
         mBingDailyViewModel.dailyImage.observe(this, Observer {
-            it ?: return@Observer
-            updateImage(it)
+            when (it?.first) {
+                BingDailyViewModel.ImageAction.NORMAL -> {
+                    updateImage(it.second)
+                }
+                BingDailyViewModel.ImageAction.CLEAR -> {
+                    clearImageCache(it.second)
+                }
+            }
         })
         mBingDailyViewModel.dailyHtmlText.observe(this, Observer {
             if (it == null) {
@@ -128,10 +135,12 @@ class BingDailyFragment : Fragment() {
         })
     }
 
+    private fun clearImageCache(imageURL: String) {
+        Fresco.getImagePipeline().evictFromCache(Uri.parse(imageURL))
+    }
+
     private fun updateHtmlText(htmlText: String) {
-//        wvContent.loadData("<head><meta name=\"viewport\" content=\"width=${wvContent.width}, user-scalable=yes\" /></head>\n$htmlText", "text/html; charset=UTF-8", null)
-        wvContent.loadData(BingStyleUtil.addBingCss(htmlText), "text/html; charset=UTF-8", null)
-//        wvContent.loadData(htmlText, "text/html; charset=UTF-8", null)
+        wvContent.loadData(htmlText, "text/html; charset=UTF-8", null)
         wvContent.visibility = View.VISIBLE
     }
 
@@ -155,12 +164,23 @@ class BingDailyFragment : Fragment() {
         wvContent.setBackgroundColor(Color.TRANSPARENT)
         wvContent.settings.apply {
             defaultTextEncodingName = "UTF-8"
-            useWideViewPort = true
-            loadWithOverviewMode = true
+//            textZoom = 110
+//            useWideViewPort = true
+//            loadWithOverviewMode = true
 //            layoutAlgorithm = WebSettings.LayoutAlgorithm.NARROW_COLUMNS
+            javaScriptEnabled = true
         }
         wvContent.setOnTouchListener { _, _ -> true }
-        sdvImage.layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, GApplication.screenHeight)
+        trlContent.viewTreeObserver.addOnPreDrawListener(object : ViewTreeObserver.OnPreDrawListener {
+            override fun onPreDraw(): Boolean {
+                sdvImage.layoutParams = (sdvImage.layoutParams as FrameLayout.LayoutParams).apply {
+                    width = FrameLayout.LayoutParams.MATCH_PARENT
+                    height = trlContent.height - topMargin - bottomMargin * 2
+                }
+                trlContent.viewTreeObserver.removeOnPreDrawListener(this)
+                return true
+            }
+        })
         trlContent.setEnableRefresh(true)
         trlContent.setEnableLoadmore(false)
         val bezierHeaderView = BezierLayout(activity)

@@ -7,6 +7,7 @@ import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.converter.scalars.ScalarsConverterFactory
 import retrofit2.http.GET
+import retrofit2.http.Headers
 
 /**
  * Created by hb.chen on 2018/3/10.
@@ -19,6 +20,7 @@ class BingDailyRepository {
 
     interface BingDailyService {
 
+        @Headers("User-Agent:Mozilla/5.0 (Linux; Android 5.0; SM-G900P Build/LRX21T) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/64.0.3282.186 Mobile Safari/537.36")
         @GET("cnhp/life")
         fun requestDailyHtmlContent(): Call<String>
     }
